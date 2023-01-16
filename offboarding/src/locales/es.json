@@ -1,0 +1,261 @@
+{
+  "common": {
+    "continue": "Continuar",
+    "confirm": "Confirmar",
+    "optional": "Opcional",
+    "uploaded": "Subido",
+    "uploading": "Subiendo",
+    "from": "Desde",
+    "to": "Hasta",
+    "start": "Comenzar",
+    "finish": "Finalizar"
+  },
+  "account": {
+    "types": {
+      "occasional": "Ocasional",
+      "professional": "Profesional",
+      "company": "Empresa"
+    }
+  },
+  "fields": {
+    "firstName": {
+      "label": "Nombre"
+    },
+    "lastName": {
+      "label": "Apellido"
+    },
+    "documentNumber": {
+      "label": "DNI"
+    },
+    "phone": {
+      "label": "Teléfono",
+      "help": "Ej.: 3516665555"
+    },
+    "email": {
+      "label": "Correo electrónico"
+    },
+    "password": {
+      "label": "Contraseña",
+      "help": "Debe tener un mínimo de 8 caracteres, una letra y un número"
+    },
+    "nationality": {
+      "label": "Nacionalidad"
+    },
+    "birthPlace": {
+      "label": "Lugar de nacimiento"
+    },
+    "civilState": {
+      "label": "Estado civil",
+      "options": {
+        "single": "Soltero/a",
+        "married": "Casado/a",
+        "divorced": "Divorciado/a",
+        "widow": "Viudo/a",
+        "concubine": "Concubino/a"
+      }
+    },
+    "birthDate": {
+      "label": "Fecha de nacimiento"
+    },
+    "classification": {
+      "label": "Rubro"
+    },
+    "occupation": {
+      "label": "Ocupación",
+      "options": {
+        "self_employed": "Autónomo/a",
+        "unemployed": "Desocupado/a",
+        "employee": "Empleado/a",
+        "student": "Estudiante",
+        "retired": "Jubilado/a"
+      }
+    },
+    "fiscalId": {
+      "label": "CUIL/CUIT",
+      "professional": {
+        "label": "CUIT"
+      }
+    },
+    "legalName": {
+      "label": "Razón Social"
+    },
+    "address": {
+      "province": {
+        "label": "Provincia"
+      },
+      "city": {
+        "label": "Localidad"
+      },
+      "neighborhood": {
+        "label": "Barrio"
+      },
+      "street": {
+        "label": "Calle"
+      },
+      "streetNumber": {
+        "label": "Número"
+      },
+      "postalCode": {
+        "label": "Código postal",
+        "help": "Ej: 1428"
+      },
+      "floorWithApartment": {
+        "label": "Piso/Departamento"
+      },
+      "floor": {
+        "label": "Piso"
+      },
+      "apartment": {
+        "label": "Departamento"
+      }
+    },
+    "tyc": {
+      "label": "Soy mayor de 13 años de edad y acepto los",
+      "link": {
+        "label": "términos y condiciones de Taca Taca."
+      }
+    },
+    "fantasyName": {
+      "label": "Nombre fantasía",
+      "help": "Este nombre aparecerá en el resumen de tarjetas de tus clientes."
+    },
+    "withHoldingTax": {
+      "category": {
+        "label": "Régimen II.BB."
+      },
+      "number": {
+        "label": "Número de ingresos brutos"
+      },
+      "excluded": {
+        "label": "Estoy excluido",
+        "from": {
+          "label": "Desde"
+        },
+        "to": {
+          "label": "Hasta"
+        }
+      }
+    },
+    "swornDeclaration": {
+      "callCenter": {
+        "isObligatedSubject": {
+          "label": "Es sujeto obligado ante la UIF",
+          "help": "Desarrolla una actividad incluida en el artículo 20 de la ley 25.246, sus modificatorias y las resoluciones UIF pertinentes."
+        },
+        "isPoliticallyExposedPerson": {
+          "label": "Es una Persona Expuesta Políticamente (PEP)",
+          "help": "Tiene/tuvo alguno de los cargos señalados en la Resolución UIF 134/2018 o lo tiene/tuvo alguno de sus familiares o allegados/as."
+        }
+      },
+      "isObligatedSubject": {
+        "label": "Soy sujeto obligado ante la UIF",
+        "help": "Desarrollo una actividad incluida en el artículo 20 de la ley 25.246, sus modificatorias y las resoluciones UIF pertinentes."
+      },
+      "isPoliticallyExposedPerson": {
+        "label": "Soy una Persona Expuesta Políticamente (PEP)",
+        "help": "Tengo/tuve alguno de los cargos señalados en la Resolución UIF 134/2018 o lo tiene/tuvo alguno de mis familiares o allegados/as."
+      },
+      "noneOfAbove": {
+        "label": "Ninguna de las anteriores"
+      }
+    },
+    "sellerCode": {
+      "label": "Código de vendedor"
+    },
+    "gender": {
+      "label": "Sexo",
+      "options": {
+        "M": {
+          "label": "Masculino"
+        },
+        "F": {
+          "label": "Femenino"
+        }
+      }
+    },
+    "bank": {
+      "label": "Banco"
+    },
+    "bankAccount": {
+      "type": {
+        "label": "Tipo de cuenta",
+        "options": {
+          "CURRENT_ACCOUNT": "Cuenta corriente",
+          "DIGITAL_CHECKBOOK": "Chequera electrónica",
+          "RUT_ACCOUNT": "RUT",
+          "SAVING_ACCOUNT": "Caja de ahorro",
+          "SIGHT_ACCOUNT": "Cuenta a la vista"
+        }
+      },
+      "number": {
+        "label": "Número de cuenta"
+      },
+      "numberConfirm": {
+        "label": "Confirma tu número de cuenta"
+      }
+    }
+  },
+  "validation": {
+    "require": "Campo requerido",
+    "min": "Mínimo {{length}} caracteres",
+    "max": "Máximo {{length}} caracteres",
+    "invalid_password": "Contraseña inválida. Debe tener un mínimo de 8 caracteres, una letra y un número.",
+    "invalid_email": "Email inválido",
+    "less_than": "El valor debe ser menor que {{ text }}",
+    "greater_than": "El valor debe ser mayor que {{ text }}",
+    "tyc": "Debes aceptar los terminos y condiciones",
+    "legalAge": "Debes ser mayor de edad",
+    "invalid_fiscal_id": "Número fiscal inválido",
+    "invalid_rut": "RUT inválido",
+    "legal_age": "Debes tener {{age}} años o más",
+    "fiscal_error": "El número fiscal ingresado no está registrado en las bases de datos o no está habilitado para operar. Por favor gestiona tu habilitación para poder operar",
+    "fiscal_id_equal": "El CUIT debe ser el mismo con el que te registraste",
+    "at_least_one_selected": "Debes elegir al menos una opción",
+    "invalid_secure_url": "La URL de retorno debe tener protocolo https y al menos 11 caraceteres",
+    "invalid_uuid": "El GUID no tiene una estructura válida",
+    "in_between": "Ingresa entre {{ min }} y {{ max }} números",
+    "exactLength": "El campo debe ser de {{length}} caracteres",
+    "inBetweenBankAccountNumber": "La cuenta bancaria tiene que tener un mínimo de extensión de {{min}} dígitos y máximo de {{max}}"
+  },
+  "file": {
+    "errors": {
+      "file-invalid-type": "La extensión del archivo no es correcta.",
+      "file-too-large": "El archivo supera el límite permitido",
+      "default": "No se pudo cargar el archivo."
+    },
+    "companyStatuteForm": {
+      "label": "Estatuto, Contrato Social o Poder de la empresa"
+    },
+    "withHoldingTax": {
+      "exemptionForms": {
+        "label": "Formulario de exención"
+      },
+      "inscriptionForms": {
+        "label": "Fomulario de inscripción"
+      },
+      "exclusionForms": {
+        "label": "Fomulario de exclusión"
+      }
+    },
+    "help": {
+      "label": "PDF o JPG (Hasta 10MB)"
+    },
+    "attachFile": {
+      "label": "Adjuntar archivo"
+    }
+  },
+  "taxIdentity": {
+    "monotribute": {
+      "label": "Monotributo"
+    },
+    "registeredManager": {
+      "label": "Responsable inscripto"
+    },
+    "notReached": {
+      "label": "No alcanzado"
+    },
+    "exempt": {
+      "label": "Exento"
+    }
+  }
+}

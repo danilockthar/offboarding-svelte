@@ -1,0 +1,15 @@
+{
+  "serviceUnavailable": {
+    "title": "¿Querés eliminar tu cuenta viüMi?"
+  },
+  "common": {
+    "importantInfo": "Tenés ${{balance}} de saldo disponible. Para eliminar tu cuenta viüMi, primero tenés que retirar tu dinero.",
+    "stepNumber": "Paso {{step}} de {{of}}",
+    "withdraw": "¿Como retiro mi dinero?",
+    "firstLiItem": "Tu servicio de lector de tarjetas y tarjeta prepaga se darán de baja.",
+    "secondLiItem": "Tus datos se borrarán de manera permanente y no volverás a acceder a tu cuenta. ",
+    "goBack": "Volver",
+    "stayAsClient": "Quedarme en viüMi",
+    "deleteAccount": "Eliminar mi cuenta"
+  }
+}
