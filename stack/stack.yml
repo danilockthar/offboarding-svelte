@@ -1,0 +1,87 @@
+# Stack version: ${PROJECT_NAME}-${STACK_VERSION} [${ENVIRONMENT}]
+version: "3.4"
+
+services:
+  offboarding:
+    dns: 8.8.8.8
+    image: ${IMAGE:offboarding}
+    environment:
+      # COMMON
+      - TAX_IDENTITY_CHECKER_API=${TAX_IDENTITY_CHECKER_API}
+      - GTM_ID=${GTM_ID}
+      - ENVIRONMENT=${ENVIRONMENT}
+      - DEBUG=${DEBUG}
+
+      # VIUMI
+      - TENANT_TACATACA_ENABLED=${TENANT_VIUMI_ENABLED}
+      - VIUMI_DASHBOARD_DOMAIN=${VIUMI_DASHBOARD_DOMAIN}
+      - VIUMI_BACKEND_DOMAIN=${VIUMI_BACKEND_DOMAIN}
+      - VIUMI_API_DOMAIN=${VIUMI_API_DOMAIN}
+      - VIUMI_DOMAIN
+      - VIUMI_TENANT_NAME
+
+    deploy:
+      mode: replicated
+      replicas: 2
+      restart_policy:
+        condition: any
+      placement:
+        constraints:
+          - node.labels.type == ${WORKER_APP_TYPE}
+      labels:
+         # VIUMI - MAIN
+        traefik.viumi.frontend.rule: "Host:${VIUMI_DOMAIN};Path:/;ReplacePath:/${VIUMI_TENANT_NAME}"
+        traefik.viumi.frontend.headers.customRequestHeaders: "x-tenant:${VIUMI_TENANT_NAME}"
+        traefik.viumi.frontend.priority: "600"
+
+
+        traefik.frontend.entryPoints: "https,http"
+        traefik.frontend.headers.customResponseHeaders: "${CUSTOM_RESPONSE_HEADERS}"
+        traefik.protocol: "http"
+        traefik.port: "3000"
+        traefik.enable: "true"
+        traefik.frontend.headers.STSSeconds: "63072000"
+        traefik.frontend.headers.STSIncludeSubdomains: "true"
+        traefik.frontend.headers.STSPreload: "true"
+        traefik.frontend.headers.browserXSSFilter: "true"
+        traefik.frontend.headers.referrerPolicy: "strict-origin"
+        traefik.frontend.headers.contentTypeNosniff: "true"
+        traefik.frontend.headers.customFrameOptionsValue: "SAMEORIGIN"
+        traefik.frontend.headers.contentSecurityPolicy: "default-src 'self'; connect-src *; font-src *; frame-src *; img-src * data:; media-src *; object-src *; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline';"
+        traefik.backend.loadbalancer.swarm: "true"
+
+        #Traefik 2.x
+        traefik.docker.lbswarm: "true"
+        traefik.http.services.${ENVIRONMENT}_offboarding.loadbalancer.server.port: "3000"
+
+
+
+
+
+        # MIDDLEWARES
+        traefik.http.middlewares.${ENVIRONMENT}_viumi.headers.customResponseHeaders.server: "x-tenant:${VIUMI_TENANT_NAME}"
+
+        # VIUMI - MAIN
+        traefik.http.routers.${ENVIRONMENT}_viumi-main.rule: "Host(`${VIUMI_DOMAIN}`) && Path(`/`)"
+        traefik.http.routers.${ENVIRONMENT}_viumi-main.entrypoints: "web,websecure"
+        traefik.http.routers.${ENVIRONMENT}_viumi-main.priority: "600"
+        traefik.http.routers.${ENVIRONMENT}_viumi-main.middlewares: "security@file,${ENVIRONMENT}_taca-taca@docker,${ENVIRONMENT}_viumi-main@docker"
+        traefik.http.middlewares.${ENVIRONMENT}_viumi-main.replacepath.path: "/${VIUMI_TENANT_NAME}"
+
+        #VIUMI - COMMON
+        traefik.http.routers.${ENVIRONMENT}_taca-taca-common.rule: "Host(`${VIUMI_DOMAIN}`) && PathPrefix(`/_next`,`/viumi`,`/api`)"
+        traefik.http.routers.${ENVIRONMENT}_taca-taca-common.middlewares: "security@file,${ENVIRONMENT}_viumi@docker"
+
+    logging:
+      driver: gelf
+      options:
+        gelf-address: ${LOGSTASH_ADDRESS}
+        tag: ${ENVIRONMENT}-${PROJECT_NAME}-offboarding
+    networks:
+      - ${NETWORK}
+
+networks:
+  ${NETWORK}:
+    external: true
+
+
