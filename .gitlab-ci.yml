@@ -1,0 +1,168 @@
+# GLOBAL - Do not edit this section ---------------------------------------------------------------------------------------------------------------
+
+stages:
+  - quality
+  - build-services
+  - build-stack
+  - upload-stack
+  - deploy
+  - approval
+  - deploy-preprod
+  - approval-to-prod
+  - approval-ops
+  - deploy-prod
+
+# TEMPLATES - Do not edit this section ------------------------------------------------------------------------------------------------------------
+
+.job_build_template: &build_definition
+  image: ${CI_STACK_BUILDER_STABLE_IMAGE}
+
+.job_upload_template: &upload_definition
+  image: ${CI_STACK_UPLOADER_STABLE_IMAGE}
+  dependencies:
+    - build:stack
+  script:
+    - uploader
+  allow_failure: false
+
+.job_deploy_template: &deploy_definition
+  image: ${CI_FULL_DEPLOYER_STABLE_IMAGE}
+  dependencies:
+    - build:stack
+  script:
+    - deployer
+  when: manual
+
+.job_only_tags: &only_tags_definition
+  only:
+    - tags
+
+.job_approval_template: &approval_definition
+  image: ${CI_APPROVAL_STABLE_IMAGE}
+  only:
+    - tags
+  variables:
+    APPROVAL_TYPE: approve
+  script:
+    - auth-checker
+  when: manual
+
+.job_rejected_template: &rejected_definition
+  image: ${CI_APPROVAL_STABLE_IMAGE}
+  only:
+    - tags
+  variables:
+    APPROVAL_TYPE: reject
+  script:
+    - auth-checker
+  when: manual
+
+
+# UNIT TEST & BUILD SERVICES - Only edit this section - Leave all comments intacts --------------------------------------------------------------------------
+
+build:offboarding:
+  <<: *build_definition
+  stage: build-services
+  script:
+    - build-services offboarding
+
+test:jest:
+  image: node:12-alpine
+  stage: quality
+  cache:
+    paths:
+      - offboarding/node_modules/
+  script:
+    - cd offboarding
+    - npm config set @geopagos:registry http://npm.geopagoslan.net
+    - yarn
+    - yarn test
+
+# STACK - Do not edit this section - ---------------------------------------------------------------------------------------------------------------------
+
+build:stack:
+  <<: *build_definition
+  stage: build-stack
+  artifacts:
+    paths:
+      - dist
+  script:
+    - build-stack
+
+upload:stack:
+  <<: *upload_definition
+  stage: upload-stack
+
+
+# Deploys - Do not edit this section -  ------------------------------------------------------------------------------------------------------------------
+
+
+deploy:dev:
+  <<: *deploy_definition
+  stage: deploy
+  environment: dev
+
+deploy:sandbox:
+  <<: *deploy_definition
+  <<: *only_tags_definition
+  stage: deploy
+  environment: sandbox
+
+deploy:test:
+  <<: *deploy_definition
+  <<: *only_tags_definition
+  stage: deploy
+  environment: test
+
+deploy:testvolatil:
+  <<: *deploy_definition
+  <<: *only_tags_definition
+  stage: deploy
+  environment: testvolatil
+
+approval:QA:
+  <<: *approval_definition
+  stage: approval
+
+approval:RQA:
+  <<: *approval_definition
+  stage: approval
+
+rejected:QA:
+  <<: *rejected_definition
+  stage: approval
+
+deploy:preprod:
+  <<: *deploy_definition
+  <<: *only_tags_definition
+  stage: deploy-preprod
+  environment: preprod
+
+deploy:demo:
+  <<: *deploy_definition
+  <<: *only_tags_definition
+  stage: deploy-preprod
+  environment: demo
+
+approval:TL:
+  <<: *approval_definition
+  stage: approval-to-prod
+
+approval:PM:
+  <<: *approval_definition
+  stage: approval-to-prod
+
+approval:OP:
+  <<: *approval_definition
+  stage: approval-ops
+  allow_failure: false
+
+rejected:OP:
+  <<: *rejected_definition
+  stage: approval-ops
+
+deploy:prod:
+  <<: *deploy_definition
+  <<: *only_tags_definition
+  stage: deploy-prod
+  environment: prod
