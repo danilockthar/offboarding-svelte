@@ -34,7 +34,6 @@ services:
         traefik.viumi.frontend.headers.customRequestHeaders: "x-tenant:${VIUMI_TENANT_NAME}"
         traefik.viumi.frontend.priority: "600"
 
-
         traefik.frontend.entryPoints: "https,http"
         traefik.frontend.headers.customResponseHeaders: "${CUSTOM_RESPONSE_HEADERS}"
         traefik.protocol: "http"
@@ -53,10 +52,6 @@ services:
         #Traefik 2.x
         traefik.docker.lbswarm: "true"
         traefik.http.services.${ENVIRONMENT}_offboarding.loadbalancer.server.port: "3000"
-
-
-
-
 
         # MIDDLEWARES
         traefik.http.middlewares.${ENVIRONMENT}_viumi.headers.customResponseHeaders.server: "x-tenant:${VIUMI_TENANT_NAME}"
