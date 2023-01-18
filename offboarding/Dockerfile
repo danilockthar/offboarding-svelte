@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:14-alpine
 
 RUN npm config set unsafe-perm true && \
     npm config set @geopagos:registry http://npm.geopagoslan.net
