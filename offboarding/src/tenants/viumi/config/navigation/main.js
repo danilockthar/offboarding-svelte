@@ -3,7 +3,7 @@ import Start from '../../components/Start';
 import Success from '../../components/Success';
 import MoneyAvailable from '../../components/MoneyAvailable';
 import ServiceUnavailable from '../../components/ServiceUnavailable';
-
+import UnsubscribeRequest from '../../components/UnsubscribeRequest'
 const main = {
   
   home: {
@@ -18,6 +18,9 @@ const main = {
   ServiceUnavailable: {
     component: ServiceUnavailable,
   },
+  UnsubscribeRequest:{
+    component:UnsubscribeRequest
+  }
 };
 
 console.log('main component', main)

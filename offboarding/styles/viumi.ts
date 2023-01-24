@@ -42,24 +42,24 @@ const theme = createMyTheme({
     },
   },
   typography: {
-    fontFamily: 'BBVA Benton Sans',
+    fontFamily: 'Roboto',
     fontSize: 16,
     h1: {
-      fontFamily: 'BBVA Benton Sans',
+      fontFamily: 'Roboto',
       fontWeight: 400,
       fontSize: '1.275rem',
       lineHeight: 1.2,
       color: colors.black,
     },
     h6: {
-      fontFamily: 'BBVA Benton Sans',
+      fontFamily: 'Roboto',
       fontWeight: 400,
       fontSize: '0.9rem',
       lineHeight: 1,
       color: colors.darkGray,
     },
     h4: {
-      fontFamily: 'BBVA Benton Sans',
+      fontFamily: 'Roboto',
       fontSize: 14,
       fontWeight: 400,
       color: baseColors.mineShaftGray,
