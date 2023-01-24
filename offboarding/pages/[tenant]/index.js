@@ -13,21 +13,13 @@ import OffboardingLayout from "../../src/layouts/OffboardingLayout";
 const { publicRuntimeConfig } = getConfig();
 
 const layouts = {
-	tacataca: "HalfDownColoredBackgroundWithGradient",
-	firstdata: "SideImage",
-	bn: "ColoredBackgroundWithGradient",
-	openpay: "Openpay",
-	smu: "Smu",
-	wapa: "Wapa",
-	puntoclave: "PuntoClave",
-	uala: "Uala",
+	viumi: "OffboardingLayout"
 };
 
-const newTenants = ["openpay", "puntoclave", "uala", "wapa", "viumi"];
+const newTenants = ["viumi"];
 
 const Main = ({ tenantName }) => {
 	const [steps, setSteps] = React.useState({});
-
 	const configurationManager = new ConfigurationManager(tenantName);
 
 	React.useEffect(() => {
@@ -45,14 +37,14 @@ const Main = ({ tenantName }) => {
 		dynamicImport().then();
 	}, [tenantName]);
 
-	return (
+	return tenantName ? (
 		<GlobalStateProvider initialState={{ configurationManager }}>
 			{/* <Layout tenantName={tenantName} /> */}
 			<Navigation debug={configurationManager.get("DEBUG")} steps={steps}>
 				<OffboardingLayout />
 			</Navigation>
 		</GlobalStateProvider>
-	);
+	):null
 };
 
 Main.propTypes = {

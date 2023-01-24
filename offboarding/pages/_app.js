@@ -21,9 +21,9 @@ function MyApp(props) {
 	const { Component, pageProps, tenantName } = props;
 	const { publicRuntimeConfig } = getConfig();
 	const tenantConfig = publicRuntimeConfig[tenantName];
-	const customGTMId =
+	/* const customGTMId =
 		(tenantConfig && tenantConfig[`GTM_ID_${tenantName.toUpperCase()}`]) ||
-		null;
+		null; */
 
 	const DynamicApp = dynamic(() =>
 		import(`../styles/${tenantName}`).then((mod) => {
@@ -49,7 +49,7 @@ function MyApp(props) {
 							rel="stylesheet"
 							href={`/${tenantName}/fonts/font-family.css`}
 						/>
-						{customGTMId && (
+					{/* 	{customGTMId && (
 							<script
 								dangerouslySetInnerHTML={{
 									__html: `
@@ -61,7 +61,7 @@ function MyApp(props) {
                     `,
 								}}
 							/>
-						)}
+						)} */}
 					</Head>
 					<ThemeProvider theme={theme}>
 						<CssBaseline />

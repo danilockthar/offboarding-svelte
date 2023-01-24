@@ -22,7 +22,7 @@ const ImportantInfo: React.FC<Props> = ({ balance }) => {
     <div className={fx.ROOT}>
       <ModalInnerHtml
         showIcon={false}
-        children={
+        innerHtml={
           '<h3 style="font-size:22px;margin-bottom:5px"><strong>&iquest;C&oacute;mo retiro mi dinero?</strong></h3><p><strong><span style="color: #4527a0;">Por transferencia</span></strong>: Pod&eacute;s retirar tu dinero disponible desde tu app vi&uuml;Mi por transferencias a otras cuentas bancarias o virtuales en la secci&oacute;n Cuenta &gt; Retirar.</p><p><strong><span style="color: #4527a0;">Por cajero autom&aacute;tico</span></strong>: Pod&eacute;s realizar extracciones en cajeros autom&aacute;ticos Banelco o Link con tu tarjeta prepaga vi&uuml;Mi</p>'
         }
         isOpen={isModalOpen}

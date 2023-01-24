@@ -1,18 +1,25 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import ImgWithPath from './ImgWithPath';
-import reactNodeToString from "react-node-to-string";
-
+import reactNodeToString from 'react-node-to-string';
 
 interface Props {
-  children: React.ReactNode;
+  children?: any;
+  innerHtml?: string;
   isOpen?: boolean;
   handleClose?: () => void;
   radius?: number;
   showIcon?: boolean;
 }
 const ModalInnerHtml: React.FC<Props> = (props) => {
-  const { children, isOpen, handleClose, radius = 0, showIcon = true } = props;
+  const {
+    children,
+    isOpen,
+    handleClose,
+    radius = 0,
+    showIcon = true,
+    innerHtml = null,
+  } = props;
   const sx = useStyles();
   return (
     <>
@@ -22,20 +29,25 @@ const ModalInnerHtml: React.FC<Props> = (props) => {
             {showIcon && (
               <ImgWithPath
                 src="assets/information.svg"
-                style={{ padding: "2em 2em 1em 2em" }}
+                style={{ padding: '2em 2em 1em 2em' }}
               />
             )}
-
-            <div
-              dangerouslySetInnerHTML={{ __html: reactNodeToString(children) }}
-              className={sx.INNER_HTML}
-            />
-            <div className={sx.BOTTOM_BOX}>
-              <button className="bottom-box-button" onClick={handleClose}>
-                {" "}
-                Cerrar
-              </button>
-            </div>
+            {innerHtml ? (
+              <>
+                <div
+                  dangerouslySetInnerHTML={{ __html: reactNodeToString( innerHtml) }}
+                  className={sx.INNER_HTML}
+                />
+                <div className={sx.BOTTOM_BOX}>
+                  <button className="bottom-box-button" onClick={handleClose}>
+                    {' '}
+                    Cerrar
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className={sx.CHILDREN}>{children}</div>
+            )}
           </div>
         </div>
       )}
@@ -69,6 +81,16 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('xs')]: {
       /* MOBILE VIEW */ width: '90vw',
       top: '30%',
+    },
+  },
+  CHILDREN: {
+    fontSize: 16,
+    fontWeight: 300,
+    color: '#191C3C',
+    padding: '0 2em',
+    textAlign: 'left',
+    [theme.breakpoints.down('xs')]: {
+      /* MOBILE VIEW */ textAlign: 'left',
     },
   },
   INNER_HTML: {
