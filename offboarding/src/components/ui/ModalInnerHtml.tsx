@@ -1,9 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import ImgWithPath from './ImgWithPath';
+import reactNodeToString from "react-node-to-string";
+
 
 interface Props {
-  children: string;
+  children: React.ReactNode;
   isOpen?: boolean;
   handleClose?: () => void;
   radius?: number;
@@ -20,17 +22,17 @@ const ModalInnerHtml: React.FC<Props> = (props) => {
             {showIcon && (
               <ImgWithPath
                 src="assets/information.svg"
-                style={{ padding: '2em 2em 1em 2em' }}
+                style={{ padding: "2em 2em 1em 2em" }}
               />
             )}
 
             <div
-              dangerouslySetInnerHTML={{ __html: children }}
+              dangerouslySetInnerHTML={{ __html: reactNodeToString(children) }}
               className={sx.INNER_HTML}
             />
             <div className={sx.BOTTOM_BOX}>
               <button className="bottom-box-button" onClick={handleClose}>
-                {' '}
+                {" "}
                 Cerrar
               </button>
             </div>

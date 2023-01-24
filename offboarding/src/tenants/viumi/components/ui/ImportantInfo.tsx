@@ -4,6 +4,7 @@ import ImgWithPath from "../../../../components/ui/ImgWithPath";
 import __ from "../../../../i18n";
 import ModalInnerHtml from "../../../../components/ui/ModalInnerHtml";
 import { useGlobalState } from "../../../../context/GlobalStateContext";
+import "typeface-roboto";
 
 interface Props {
   balance?: string;
@@ -48,8 +49,16 @@ const ImportantInfo: React.FC<Props> = ({ balance }) => {
       {status_code === "PENDING_DEPOSIT" && (
         <div className="balance_wrapper">
           <p className="balance_text">
-            Tu cuenta tiene un deposito pendiente para la fecha{" "}
-            <span> {message} </span>
+            Tu cuenta tiene un deposito pendiente para la fecha Tenés saldo a
+            liberar, estará disponible en tu billetera virtual el{" "}
+            <span>
+              <b>{message}</b>
+            </span>
+            . Para eliminar tu cuenta, primero tenés que retirar tu dinero.
+          </p>
+          <p className={fx.MODAL_TITLE} onClick={() => setIsModalOpen(true)}>
+            {" "}
+            {__("common.withdraw")}{" "}
           </p>
         </div>
       )}

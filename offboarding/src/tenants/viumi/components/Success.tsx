@@ -1,22 +1,108 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Button } from "@material-ui/core";
-import __ from "../../../i18n";
-import ImportantInfo from "./ui/ImportantInfo";
+import { Typography } from "@material-ui/core";
+import __ from "src/i18n";
 import ImgWithPath from "src/components/ui/ImgWithPath";
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
+import ModalInnerHtml from "src/components/ui/ModalInnerHtml";
+import useUnsubscribe from "../services/useUnsubscribe";
+import MainLoader from "src/components/ui/MainLoader";
+import { useNavigation } from "@geopagos/react-oz-wizard";
+import "typeface-roboto";
 
 const Success = () => {
   const fx = useStyles();
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [canOperate, setCanOperate] = React.useState(true);
   const [isChecked, setIsChecked] = React.useState(false);
   const isOriginDashboard = router?.query?.origin === "dashboard";
+  const { unsubscribe, isLoading, error, data, isSuccess, isError } =
+    useUnsubscribe();
+  const { goStep } = useNavigation();
 
   const onChangeCheckbox = ({ target: { checked } }) => {
     setIsChecked(checked);
   };
+
+  const handleModal = () => {
+    setCanOperate(true);
+    setIsModalOpen(true);
+  };
+
+  React.useEffect(() => {
+    if (error && !isSuccess) {
+      setCanOperate(false);
+    }
+    if (isSuccess) goStep("UnsubscribeRequest");
+  }, [error, isSuccess]);
+
   return (
     <div className={fx.ROOT}>
+      <ModalInnerHtml
+        showIcon={false}
+        isOpen={isModalOpen}
+        radius={6}
+        handleClose={() => setIsModalOpen(false)}
+      >
+        {isLoading && <MainLoader isLoading={isLoading} />}
+        {canOperate ? (
+          <>
+            <div className="modal-header">
+              <h3> {__("common.areYouSure")} </h3>
+              <ImgWithPath
+                className="icon-close"
+                src="icons/cross.svg"
+                onClick={() => setIsModalOpen(false)}
+              />
+            </div>
+            <p> {__("common.disclaimer")}</p>
+            <div className="modal-button-wrapper">
+              <button
+                className="delete-account-btn"
+                onClick={() => unsubscribe()}
+              >
+                {" "}
+                {__("common.deleteAccount")}{" "}
+              </button>
+              <button
+                className="goback-button"
+                onClick={() => setIsModalOpen(false)}
+              >
+                Cancelar{" "}
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="modal-header">
+              <h3> {__("common.cannotprocess")} </h3>
+              <ImgWithPath
+                className="icon-close"
+                src="icons/cross.svg"
+                onClick={() => setIsModalOpen(false)}
+              />
+            </div>
+            <p>
+              {" "}
+              En estos momentos no podemos procesar tu solicitud de baja de
+              cuenta. Intentalo más tarde o comunicate con nosotros al{" "}
+              <a href="tel:0810-345-4222" className={fx.BOLD_VIUMI}>
+                0810-345-4222
+              </a>
+              .
+            </p>
+            <div className="modal-button-wrapper">
+              <button
+                className="delete-account-btn"
+                onClick={() => setIsModalOpen(false)}
+              >
+                Intentarlo más tarde
+              </button>
+            </div>
+          </>
+        )}
+      </ModalInnerHtml>
       <a href={"https://exitwebview"} className="back-button-arrow">
         <ImgWithPath src={"assets/arrow.svg"} />
       </a>
@@ -61,6 +147,7 @@ const Success = () => {
         <button
           className="delete-account-btn"
           disabled={!isChecked}
+          onClick={handleModal}
           style={{ background: !isChecked && "#A8A8A8" }}
         >
           {" "}
@@ -94,6 +181,7 @@ const useStyles = makeStyles((theme) => ({
       padding: "0rem 1rem 1rem 1rem",
     },
     "& .title": {
+      fontFamily: "Roboto",
       fontSize: 24,
       [theme.breakpoints.down("xs")]: {
         textAlign: "left",
@@ -139,9 +227,10 @@ const useStyles = makeStyles((theme) => ({
       background: theme.palette.primary.main,
       borderRadius: "24px",
       transition: "0.3s",
+      fontSize: 16,
       color: "white",
       border: "none",
-      padding: "10px",
+      padding: "10px 20px",
       cursor: "pointer",
     },
     "& .checkbox-wrapper": {
@@ -151,6 +240,26 @@ const useStyles = makeStyles((theme) => ({
       gridColumnGap: "5px",
       '& input[type="checkbox"]:checked': {
         accentColor: theme.palette.primary.main,
+      },
+    },
+    "& .modal-button-wrapper": {
+      borderTop: "1px solid #F0F0F0",
+      padding: "1rem 0 1rem 0",
+      display: "flex",
+      flexDirection: "row-reverse",
+      alignItems: "baseline",
+      gap: "8px",
+      [theme.breakpoints.down("xs")]: {
+        display: "grid !important",
+      },
+    },
+    "& .modal-header": {
+      display: "grid",
+      gridTemplateColumns: "1fr 24px",
+      "& .icon-close": {
+        justifySelf: "end",
+        cursor: "pointer",
+        alignSelf: "center",
       },
     },
   },

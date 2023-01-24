@@ -6,6 +6,7 @@ import ImportantInfo from "./ui/ImportantInfo";
 import ImgWithPath from "../../../components/ui/ImgWithPath";
 import router, { useRouter } from "next/router";
 import { useGlobalState } from "../../../context/GlobalStateContext";
+import "typeface-roboto";
 
 const MoneyAvailable = () => {
   const fx = useStyles();
@@ -74,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
     },
     "& .title": {
       fontSize: 24,
+      fontFamily: "Roboto",
       [theme.breakpoints.down("xs")]: {
         textAlign: "left",
       },

@@ -41,11 +41,13 @@
 		"react-dropzone": "^11.3.2",
 		"react-i18next": "^11.8.13",
 		"react-imask": "^6.1.0",
+		"react-node-to-string": "^0.1.1",
 		"react-qr-code": "^2.0.2",
 		"react-query": "^3.13.6",
 		"react-sizeme": "^3.0.1",
 		"react-text-mask": "^5.4.3",
 		"rut.js": "^2.0.0",
+		"typeface-roboto": "^1.1.13",
 		"typescript": "^4.3.5",
 		"validator": "^13.1.17",
 		"yup": "^0.32.9"
@@ -71,4 +73,3 @@
 		"react-test-renderer": "17.0.2"
 	}
 }
-

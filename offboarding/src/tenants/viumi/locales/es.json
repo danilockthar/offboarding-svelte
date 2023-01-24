@@ -10,6 +10,12 @@
     "secondLiItem": "Tus datos se borrarán de manera permanente y no volverás a acceder a tu cuenta. ",
     "goBack": "Volver",
     "stayAsClient": "Quedarme en viüMi",
-    "deleteAccount": "Eliminar mi cuenta"
+    "deleteAccount": "Eliminar mi cuenta",
+    "areYouSure": "¿Estás seguro de eliminar tu cuenta viüMi?",
+    "disclaimer": "Tené en cuenta que al hacerlo ya no podrás operar en nuestros sitios, perderás tu nombre de usuario y tus beneficios.",
+    "unsubscribeRequestTitle": "Tu solicitud de baja de cuenta fue enviada",
+    "requestNumber": "Tu número de gestión es ",
+    "exit": "Salir",
+    "cannotprocess": "No podemos procesar tu solicitud "
   }
 }

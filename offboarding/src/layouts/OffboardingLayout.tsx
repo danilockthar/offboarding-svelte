@@ -13,7 +13,7 @@ import __ from "../i18n";
 const logoPath = "assets/logo.svg";
 
 interface Props {
-	children?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const Layout: React.FC<Props> = ({ children }) => {

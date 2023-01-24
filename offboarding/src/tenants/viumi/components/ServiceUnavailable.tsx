@@ -5,6 +5,7 @@ import __ from "../../../i18n";
 import ImportantInfo from "./ui/ImportantInfo";
 import ImgWithPath from "../../../components/ui/ImgWithPath";
 import router, { useRouter } from "next/router";
+import "typeface-roboto";
 
 const ServiceUnavailable = () => {
   const fx = useStyles();
@@ -73,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
     },
     "& .title": {
       fontSize: 24,
+      fontFamily: "Roboto",
       [theme.breakpoints.down("xs")]: {
         textAlign: "left",
       },

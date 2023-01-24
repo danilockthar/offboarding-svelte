@@ -1,11 +1,12 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useNavigation } from "@geopagos/react-oz-wizard";
-import __ from "../../../i18n";
-import { useGlobalState } from "../../../context/GlobalStateContext";
+import __ from "src/i18n";
+import { useGlobalState } from "src/context/GlobalStateContext";
 import { useRouter } from "next/router";
+import MainLoader from "src/components/ui/MainLoader";
+import useCanUnsubscribe from "../services/useCanUnsubscribe";
 import useGetStatus from "../services/useGetStatus";
-import MainLoader from "../../../components/ui/MainLoader";
 
 const statusPage = {
   OK: "Success",
@@ -20,6 +21,26 @@ const Email = () => {
   const router = useRouter();
   const { goStep } = useNavigation();
   const { data, isLoading, error } = useGetStatus(router?.query?.token || null);
+  // const { canUnsubscribe, isLoading } = useCanUnsubscribe();
+
+  // React.useEffect(() => {
+  //   if (router?.query?.token) {
+  //     canUnsubscribe(router?.query?.token, {
+  //       onError: (error: any) => {
+  //         if (error) goStep("ServiceUnavailable");
+  //       },
+  //       onSuccess: (data) => {
+  //         if (data?.data) {
+  //           setGlobalState({
+  //             status_code: data?.data?.status_code,
+  //             message: data?.data?.message,
+  //           });
+  //           goStep(statusPage[data?.data?.status_code]);
+  //         }
+  //       },
+  //     });
+  //   }
+  // }, [router?.query?.token]);
 
   React.useEffect(() => {
     if (data && !error) {
@@ -36,11 +57,6 @@ const Email = () => {
   return (
     <div className={sx.ROOT}>
       {isLoading && <MainLoader isLoading={isLoading} />}
-      {/*  <ModalInnerHtml
-        children={'<div> danidani </div>'}
-        isOpen={isModalOpen}
-        handleClose={() => setIsModalOpen(false)}
-      /> */}
     </div>
   );
 };

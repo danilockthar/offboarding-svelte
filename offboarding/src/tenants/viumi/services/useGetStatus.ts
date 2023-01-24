@@ -15,7 +15,7 @@ const useGetStatus = (token: string | string[]) => {
     const { configurationManager } = globalState;
     const baseUrl = configurationManager.get('API_DOMAIN');
     return API().post(
-      'https://9ld7gbp3tq.api.quickmocker.com/api/v1.0/CanUnsubscribe',
+      'https://9ld7gbp3tq.api.quickmocker.com/api/v1.0/CanUnsubscribe/pending',
     );
     /* return API(baseUrl).get(`/unsubscribe/validate?merchantId=XXXXXXXXX`); */
   });
