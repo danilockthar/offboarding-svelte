@@ -1,7 +1,9 @@
 <script>
+	/**@type {{ tenant:string }}*/
+	export let data;
 </script>
 
-<h1 class="text-3xl font-bold underline">Hello DANI!</h1>
+<h1 class="text-3xl font-bold underline">Hello {data.tenant?? 'Partner'}</h1>
 
 <style lang="postcss">
 	:global(html) {
