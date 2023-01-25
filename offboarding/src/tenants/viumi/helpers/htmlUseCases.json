@@ -1,6 +1,0 @@
-{
-  "email_not_registered": "<p> El mail ingresado no coincide con ninguna cuenta de Openpay.  Si aún no te registraste <a href='google.com.ar' target='__blank'>Ingresa aquí para registrarte</a>. </p>",
-  "email_already_registered": "<p>Este mail ya se encuentra en uso </p> ",
-  "somethingWrong": "<p> Ha ocurrido un error.</p>",
-  "validateCode": "<p><strong>&iquest;No recibiste el c&oacute;digo?</strong></p><p>Si pasaron algunos minutos, y a&uacute;n no lo recibiste:</p><p>-Revisa tu carpeta de correos no deseados o spam.<br />-Comprueba que el mail sea correcto.</p>"
-}
