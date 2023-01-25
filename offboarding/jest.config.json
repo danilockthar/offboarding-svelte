@@ -1,5 +1,5 @@
 {
-    "transform": {
+"transform": {
     "^.+\\.js$": "babel-jest",
     "^.+\\.svelte$": [
       "svelte-jester",
@@ -10,12 +10,12 @@
     "^.+\\.ts$": "ts-jest",
     ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
   },
-  "moduleFileExtensions": [
+"moduleFileExtensions": [
     "js",
     "ts",
     "svelte"
   ],
-  "testEnvironment": "jsdom",
-  "setupFilesAfterEnv": ["@testing-library/jest-dom/extend-expect"],
-  "passWithNoTests": true
+"testEnvironment": "jsdom",
+"setupFilesAfterEnv": ["@testing-library/jest-dom/extend-expect"],
+"passWithNoTests": true
 }
