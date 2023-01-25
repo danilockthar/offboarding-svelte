@@ -67,7 +67,7 @@ build:offboarding:
     - build-services offboarding
 
 test:jest:
-  image: node:14-alpine
+  image: node:16-alpine
   stage: quality
   cache:
     paths:
