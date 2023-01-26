@@ -1,7 +1,8 @@
 import type { LoadEvent } from '@sveltejs/kit';
-
-export function load({ params, fetch }: LoadEvent) {
+import api from '../../services/fetcher';
+export async function load({ params, fetch }: LoadEvent) {
 	return {
-		tenant: params.tenant || null
+		tenant: params.tenant || null,
+		token: params.token || null
 	};
 }
