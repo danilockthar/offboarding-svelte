@@ -1,6 +1,8 @@
 <script>
+	import '../tenants/viumi.css'
 	/**@type {string}*/
 	export let tenant;
+
 </script>
 
 <div class="min-h-screen">
@@ -10,7 +12,8 @@
 	</div>
 	<div class="relative">
 		<div
-	class="bg-white shadow-md min-h-screen lg:min-h-fit max-w-full lg:w-4/6 lg:absolute py-8 px-4 lg:p-8 lg:top-1/2 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 lg:rounded-lg"
+		id="paper-box-viumi"
+		class="grid auto-rows-min gap-y-5 bg-white shadow-md min-h-screen lg:min-h-fit max-w-full lg:w-4/6 lg:absolute py-8 px-4 lg:p-8 lg:top-1/2 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-8 lg:rounded-lg"
 >
 <slot />	
 		</div>

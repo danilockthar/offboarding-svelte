@@ -1,4 +1,5 @@
 <script>
+	import ImportantInfo from "../../../components/UI/ImportantInfo.svelte";
 	import Text from "../../../components/UI/Text.svelte";
 
 	let mapper = {
@@ -16,7 +17,10 @@
 {#await config then json}
 {#each json.default["pending-deposit"] as component}
 	{#if component.component === "Text"}
-	<Text value={component.value} type={component.type}/>
+	<Text {...component}/>
+	{/if}
+	{#if component.component === "ImportantInfo"}
+	<ImportantInfo {...component} tenant={data.tenant}/>
 	{/if}
 {/each}
 

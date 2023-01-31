@@ -5,7 +5,7 @@
 
 	/**@type {{ tenant:string | null, token:string | null, error: boolean | null }}*/
 	export let data;
-	export let isLoading = false;
+	export let isLoading = true;
 
 	/**@type {Record<any, string>}*/
 	const statusPage = {
@@ -15,7 +15,6 @@
 		ERROR: 'cannot-operate',
 	};
 	onMount(async () => {
-		isLoading = true;
 		const fakeResponse = {data:{
 			status_code:'PENDING_DEPOSIT',
 			message:'$1400.00'
@@ -27,9 +26,11 @@
 				isLoading = false;
 			})
 			.catch((err) => {
+				setTimeout(() => {
+
+					goto(`/${data.tenant}/${statusPage[fakeResponse.data.status_code]}`)
+				}, 2000)
 				/* setContext('response_data', fakeResponse.data); */
-				goto(`/${data.tenant}/${statusPage[fakeResponse.data.status_code]}`)
-				isLoading = false;
 				/* goto(`/${data.tenant}/cannot-operate`);
 				isLoading = false; */
 			});
