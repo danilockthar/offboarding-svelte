@@ -1,0 +1,25 @@
+{
+	"cannot-operate": [
+		{
+			"component": "title",
+			"value": "no puede operar"
+		}
+	],
+	"pending-deposit": [
+		{
+			"component": "Text",
+			"value": "This is the title",
+			"type": "h1"
+		},
+		{
+			"component": "Text",
+			"value": "This is the subtitle",
+			"type": "h3"
+		},
+		{
+			"component": "Text",
+			"value": "This is the paragraph",
+			"type": "p"
+		}
+	]
+}
