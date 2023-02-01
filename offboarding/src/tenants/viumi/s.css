@@ -28,4 +28,7 @@
 		@apply font-bold;
 		@apply justify-self-start;
 	}
+	#dialog-modal {
+		@apply rounded-md;
+	}
 }

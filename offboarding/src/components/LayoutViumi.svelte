@@ -1,8 +1,7 @@
 <script>
-	import '../tenants/viumi.css'
+	import '../tenants/viumi/s.css';
 	/**@type {string}*/
 	export let tenant;
-
 </script>
 
 <div class="min-h-screen">
@@ -10,12 +9,12 @@
 		<img src="/{tenant}/assets/logo.svg" alt="This is the logo of the website" />
 		<p class="justify-self-end text-white mt-1 mb-1 ml-0 mr-0">Baja de cuenta viüMi</p>
 	</div>
-	<div class="relative">
+	<div class="relative max-w-full grid justify-center">
 		<div
-		id="paper-box-viumi"
-		class="grid auto-rows-min gap-y-5 bg-white shadow-md min-h-screen lg:min-h-fit max-w-full lg:w-4/6 lg:absolute py-8 px-4 lg:p-8 lg:top-1/2 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-8 lg:rounded-lg"
->
-<slot />	
+			id="paper-box-viumi"
+			class="grid auto-rows-min gap-y-5 bg-white shadow-md min-h-screen lg:min-h-fit w-full lg:relative py-8 px-4 lg:p-8 top-[-30px] lg:rounded-lg"
+		>
+			<slot />
 		</div>
 	</div>
 </div>
