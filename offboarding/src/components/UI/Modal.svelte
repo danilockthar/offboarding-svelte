@@ -9,9 +9,16 @@
 	export let isModalOpen;
 	/**@type {string}*/
 	export let modalBody;
+	/**@type {Array<Record<string, string>>}*/
+	export let footer;
+
 	const dispatch = createEventDispatcher();
 	const close = () => {
 		dispatch('close');
+	};
+	/**@type {Record<string, () => void>}*/
+	const actions = {
+		close: close
 	};
 </script>
 
@@ -34,7 +41,9 @@
 			{@html modalBody}
 		</div>
 		<div id="diagol-modal-footer">
-			<button on:click={close}> close</button>
+			{#each footer as elem}
+				<button id={elem.id} on:click={actions[elem.action]}>{elem.text}</button>
+			{/each}
 		</div>
 	</div>
 </div>

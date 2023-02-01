@@ -4,6 +4,14 @@
 	export let tenant;
 </script>
 
+<svelte:head>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true" />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+		rel="stylesheet"
+	/>
+</svelte:head>
 <div class="min-h-screen">
 	<div class="bg-viumi-primary max-w-full pb-4 pt-4 pl-8 pr-8 h-32 lg:grid hidden grid-cols-2 ">
 		<img src="/{tenant}/assets/logo.svg" alt="This is the logo of the website" />

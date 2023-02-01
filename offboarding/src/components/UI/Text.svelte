@@ -1,14 +1,14 @@
 <script>
-    
-    /**@type {string}*/
-    export let value;
-    /**@type {string}*/
-    export let id;
-
-    /**@type {string}*/
-    export let type;
-
+	/**@type {string}*/
+	export let value;
+	/**@type {string}*/
+	export let id;
+	/**@type {string}*/
+	export let type;
 </script>
 
-
-<svelte:element class="text-center" this={type} {id}>{value}</svelte:element>
+{#if type === 'html'}
+	{@html value}
+{:else}
+	<svelte:element this={type ?? 'p'} {id}>{value}</svelte:element>
+{/if}

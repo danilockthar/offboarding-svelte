@@ -16,8 +16,36 @@
 			"component": "ImportantInfo",
 			"id": "important-info-component",
 			"primaryText": "Tenés {{message}} de saldo disponible. Para eliminar tu cuenta viüMi, primero tenés que retirar tu dinero.",
-			"modalTitle": "¿Cómo retiro mi dinero?",
-			"modalBody": "<p><strong><span style='color: #4527a0;'>Por transferencia</span></strong>: Pod&eacute;s retirar tu dinero disponible desde tu app vi&uuml;Mi por transferencias a otras cuentas bancarias o virtuales en la secci&oacute;n Cuenta &gt; Retirar.</p><br/><p><strong><span style='color: #4527a0;'>Por cajero autom&aacute;tico</span></strong>: Pod&eacute;s realizar extracciones en cajeros autom&aacute;ticos Banelco o Link con tu tarjeta prepaga vi&uuml;Mi</p>"
+			"modal": {
+				"modalTitle": "¿Cómo retiro mi dinero?",
+				"modalBody": "<p><strong><span style='color: #4527a0;'>Por transferencia</span></strong>: Pod&eacute;s retirar tu dinero disponible desde tu app vi&uuml;Mi por transferencias a otras cuentas bancarias o virtuales en la secci&oacute;n Cuenta &gt; Retirar.</p><br/><p><strong><span style='color: #4527a0;'>Por cajero autom&aacute;tico</span></strong>: Pod&eacute;s realizar extracciones en cajeros autom&aacute;ticos Banelco o Link con tu tarjeta prepaga vi&uuml;Mi</p>",
+				"footer": [
+					{
+						"id": "close-modal-btn",
+						"action": "close",
+						"text": "Cerrar"
+					}
+				]
+			}
+		},
+		{
+			"component": "Text",
+			"value": "Tené en cuenta que:"
+		},
+		{
+			"component": "Text",
+			"type": "html",
+			"value": "<ul><li style='margin-bottom:15px;'>Tu servicio de lector de tarjetas y tarjeta prepaga se dar&aacute;n de baja.</li><li>Tus datos se borrarán de manera permanente y no volverás a acceder a tu cuenta. </li></ul>"
+		},
+		{
+			"component": "Text",
+			"type": "html",
+			"value": "<p>Record&aacute; que con vi&uuml;Mi ten&eacute;s m&uacute;ltiples beneficios. Conoce m&aacute;s en <a href='http://www.viumi.com.ar' target='_blank' style='color:#4527A0;font-weight:600;'>www.viumi.com.ar</a></p>"
+		},
+		{
+			"component": "Text",
+			"type": "html",
+			"value": "<p>&iquest;Ten&eacute;s alguna duda o inconveniente? Podemos ayudarte. Llamanos al <a href='tel:0810-345-4222' style='color:#4527A0;font-weight:600;'>0810-345-4222</a> o envianos un e-mail a <a href='mailto:consultas@viumi.com.ar' style='color:#4527A0;font-weight:600;'>consultas@viumi.com.ar</a></p>"
 		}
 	]
 }

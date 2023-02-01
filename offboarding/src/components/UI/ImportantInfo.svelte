@@ -10,10 +10,8 @@
 	export let id;
 	/**@type {string}*/
 	export let primaryText;
-	/**@type {string}*/
-	export let modalTitle;
-	/**@type {string}*/
-	export let modalBody;
+	/**@type {any}*/
+	export let modal;
 
 	export let isModalOpen = false;
 
@@ -27,15 +25,9 @@
 	<img src={`/${tenant}/assets/icon_alert.png`} alt="Important information" />
 	<div class="grid gap-y-4">
 		<p>{primaryText}</p>
-		{#if modalTitle}
-			<Modal
-				on:close={() => (isModalOpen = false)}
-				{isModalOpen}
-				{tenant}
-				{modalTitle}
-				{modalBody}
-			/>
-			<button id={'modal-title'} on:click={() => (isModalOpen = true)}> {modalTitle} </button>
+		{#if modal}
+			<Modal on:close={() => (isModalOpen = false)} {...modal} {isModalOpen} {tenant} />
+			<button id={'modal-title'} on:click={() => (isModalOpen = true)}> {modal.modalTitle} </button>
 		{/if}
 	</div>
 </div>

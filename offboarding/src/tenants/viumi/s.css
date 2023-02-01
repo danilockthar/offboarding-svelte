@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+	body {
+		font-family: Roboto;
+	}
 	h1 {
 		@apply text-3xl;
 	}
@@ -11,6 +14,11 @@
 	}
 	h3 {
 		@apply text-xl;
+	}
+	ul,
+	ol {
+		list-style: revert;
+		list-style-position: inside;
 	}
 	/* ... */
 }
@@ -30,5 +38,21 @@
 	}
 	#dialog-modal {
 		@apply rounded-md;
+	}
+	#diagol-modal-footer {
+		@apply grid;
+		@apply grid-flow-col;
+		@apply gap-x-4;
+		@apply justify-end;
+		@apply pt-4;
+		@apply pb-0;
+		@apply pl-0;
+		@apply pr-0;
+		@apply border-t;
+		@apply border-[#0000000d];
+	}
+	#close-modal-btn {
+		@apply text-[#4527A0];
+		@apply font-bold;
 	}
 }
