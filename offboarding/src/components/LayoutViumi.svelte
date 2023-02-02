@@ -20,7 +20,7 @@
 	<div class="relative max-w-full grid justify-center">
 		<div
 			id="paper-box-viumi"
-			class="grid auto-rows-min gap-y-5 bg-white shadow-md min-h-screen lg:min-h-fit w-[75vw] lg:relative py-8 px-4 lg:p-8 top-[-30px] lg:rounded-lg"
+			class="grid auto-rows-min gap-y-5 bg-white shadow-md min-h-screen lg:min-h-fit lg:w-[75vw] w-full lg:relative py-8 px-4 lg:p-8 top-[-30px] lg:rounded-lg"
 		>
 			<slot />
 		</div>
