@@ -27,6 +27,8 @@
 	#title-viumi {
 		@apply text-left;
 		@apply lg:text-center;
+		@apply text-[#2B2B2B];
+		@apply font-[500];
 	}
 	#important-info-component {
 		@apply bg-[#f6f4fa];
@@ -67,5 +69,9 @@
 		@apply hidden;
 		@apply justify-self-start;
 		@apply lg:block;
+	}
+	#close-modal-btn-2 {
+		color: red;
+		text-decoration: dashed;
 	}
 }

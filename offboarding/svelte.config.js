@@ -10,7 +10,8 @@ const config = {
 	preprocess: sveltePreprocess(),
 
 	kit: {
-		adapter: adapterNode()
+		adapter: adapterNode(),
+		inlineStyleThreshold: 1024
 	}
 };
 

@@ -28,7 +28,7 @@
 <div {id} style="background-color:{bgColor}" class="grid p-4 grid-cols-[35px_1fr] h-fit">
 	<img src={`/${tenant}/assets/icon_alert.png`} alt="Important information" />
 	<div class="grid gap-y-4">
-		<p>{primaryText}</p>
+		<p>{@html primaryText}</p>
 		{#if modal}
 			<Modal on:close={() => (isModalOpen = false)} {...modal} {isModalOpen} {tenant} />
 			<button id={'modal-title'} on:click={() => (isModalOpen = true)}> {modal.modalTitle} </button>
