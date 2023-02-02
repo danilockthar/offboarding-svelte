@@ -1,5 +1,7 @@
 <script>
+	import { getContext } from 'svelte';
 	import { replaceTags } from '../../lib/replaceTags';
+	import { response_data } from '../../services/store';
 	import Modal from './Modal.svelte';
 
 	/**@type {string}*/
@@ -14,8 +16,10 @@
 	export let modal;
 
 	export let isModalOpen = false;
-
-	const message = '$343434.00';
+	let message;
+	// @ts-ignore
+	response_data.subscribe((value) => (message = value.message));
+	/* const message = '$343434.00'; */
 	if (message) {
 		primaryText = replaceTags(primaryText, { message });
 	}

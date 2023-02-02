@@ -7,6 +7,12 @@
 	],
 	"pending-deposit": [
 		{
+			"component": "CallToAction",
+			"id": "back-icon-viumi",
+			"action": "goback",
+			"icon": "arrow-back"
+		},
+		{
 			"component": "Text",
 			"id": "title-viumi",
 			"value": "¿Querés eliminar tu cuenta viüMi?",
@@ -46,6 +52,12 @@
 			"component": "Text",
 			"type": "html",
 			"value": "<p>&iquest;Ten&eacute;s alguna duda o inconveniente? Podemos ayudarte. Llamanos al <a href='tel:0810-345-4222' style='color:#4527A0;font-weight:600;'>0810-345-4222</a> o envianos un e-mail a <a href='mailto:consultas@viumi.com.ar' style='color:#4527A0;font-weight:600;'>consultas@viumi.com.ar</a></p>"
+		},
+		{
+			"component": "CallToAction",
+			"id": "back-button-viumi",
+			"value": "Volver",
+			"action": "goback"
 		}
 	]
 }

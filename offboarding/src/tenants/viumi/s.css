@@ -55,4 +55,17 @@
 		@apply text-[#4527A0];
 		@apply font-bold;
 	}
+	#back-button-viumi {
+		@apply lg:text-center;
+		@apply text-[#4527A0];
+		@apply font-bold;
+		@apply mt-6;
+		@apply w-fit;
+		@apply justify-self-center;
+	}
+	#back-icon-viumi {
+		@apply hidden;
+		@apply justify-self-start;
+		@apply lg:block;
+	}
 }
