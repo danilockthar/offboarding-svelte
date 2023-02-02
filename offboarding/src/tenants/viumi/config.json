@@ -27,6 +27,11 @@
 				"modalBody": "<p><strong><span style='color: #4527a0;'>Por transferencia</span></strong>: Pod&eacute;s retirar tu dinero disponible desde tu app vi&uuml;Mi por transferencias a otras cuentas bancarias o virtuales en la secci&oacute;n Cuenta &gt; Retirar.</p><br/><p><strong><span style='color: #4527a0;'>Por cajero autom&aacute;tico</span></strong>: Pod&eacute;s realizar extracciones en cajeros autom&aacute;ticos Banelco o Link con tu tarjeta prepaga vi&uuml;Mi</p>",
 				"footer": [
 					{
+						"id": "stay-in",
+						"action": "close",
+						"text": "Quedarme en viumi"
+					},
+					{
 						"id": "close-modal-btn",
 						"action": "close",
 						"text": "Cerrar"
