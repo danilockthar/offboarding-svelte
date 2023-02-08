@@ -1,7 +1,14 @@
 import { redirect, type LoadEvent, error } from '@sveltejs/kit';
 
+const statusPage: Record<string, any> = {
+	OK: 'can-unsubscribe',
+	HAS_BALANCE: 'has-balance',
+	PENDING_DEPOSIT: 'pending-deposit',
+	ERROR: 'service-unavailable'
+};
+
 /** @type {import('./$types').PageLoad} */
-export async function load({ params, fetch, cookies }: any) {
+export async function load({ params, fetch, cookies, setHeaders }: any) {
 	const tenants = ['viumi'];
 	if (!tenants.includes(params.tenant)) {
 		throw error(404, 'Not found');
@@ -15,12 +22,15 @@ export async function load({ params, fetch, cookies }: any) {
 			'X-Tenant': 'macro'
 		}
 	});
-	cookies.set('response_', JSON.stringify({ message: '$900.000' }), {
-		maxAge: 60 * 60 * 24 * 365,
-		httpOnly: true,
-		path: '/'
-	});
+	const mockResponse = { message: 'a lot of money', status: 'PENDING_DEPOSIT' };
+	console.log('entra');
+
 	if (!res.ok) {
-		throw redirect(301, '/viumi/pending-deposit');
+		cookies.set('response_', JSON.stringify(mockResponse), {
+			maxAge: 10,
+			httpOnly: true,
+			path: '/'
+		});
+		throw redirect(301, `/${params.tenant}/${statusPage[mockResponse.status]}`);
 	}
 }

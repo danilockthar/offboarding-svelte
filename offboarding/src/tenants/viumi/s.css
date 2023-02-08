@@ -54,6 +54,7 @@
 		@apply pb-0;
 		@apply pl-0;
 		@apply pr-0;
+		@apply lg:pr-4;
 		@apply border-t;
 		@apply border-[#0000000d];
 	}

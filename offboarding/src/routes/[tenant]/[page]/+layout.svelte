@@ -17,4 +17,7 @@
 	export const LayoutPicked = data.tenant ? layouts[data.tenant] ?? NotFound : null;
 </script>
 
-<LayoutPicked tenant={data.tenant}><slot /></LayoutPicked>
+<svelte:component this={layouts[data.tenant]} tenant={data.tenant}>
+	<slot />
+</svelte:component>
+<!-- <LayoutPicked tenant={data.tenant}></LayoutPicked> -->

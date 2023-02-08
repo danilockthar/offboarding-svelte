@@ -14,7 +14,7 @@
 	export const config = import(`../../../tenants/${data.tenant}/config.json`);
 </script>
 
-{#each data.configs.data['pending-deposit'] as component}
+{#each data.configs['pending-deposit'] as component}
 	{#if component.component === 'Text'}
 		<Text {...component} />
 	{/if}
