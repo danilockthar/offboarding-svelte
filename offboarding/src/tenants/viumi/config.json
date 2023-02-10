@@ -5,7 +5,7 @@
 			"value": "no puede operar"
 		}
 	],
-	"pending-deposit": [
+	"PENDING_DEPOSIT": [
 		{
 			"component": "CallToAction",
 			"id": "back-icon-viumi",

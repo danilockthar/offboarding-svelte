@@ -23,14 +23,17 @@ export async function load({ params, fetch, cookies, setHeaders }: any) {
 		}
 	});
 	const mockResponse = { message: 'a lot of money', status: 'PENDING_DEPOSIT' };
-	console.log('entra');
 
 	if (!res.ok) {
-		cookies.set('response_', JSON.stringify(mockResponse), {
+		return {
+			tenant: params.tenant,
+			response: mockResponse
+		};
+		/* cookies.set('response_', JSON.stringify(mockResponse), {
 			maxAge: 10,
 			httpOnly: true,
 			path: '/'
 		});
-		throw redirect(301, `/${params.tenant}/${statusPage[mockResponse.status]}`);
+		throw redirect(301, `/${params.tenant}/${statusPage[mockResponse.status]}`); */
 	}
 }
