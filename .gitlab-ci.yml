@@ -57,7 +57,6 @@ stages:
     - auth-checker
   when: manual
 
-
 # UNIT TEST & BUILD SERVICES - Only edit this section - Leave all comments intacts --------------------------------------------------------------------------
 
 build:offboarding:
@@ -67,7 +66,7 @@ build:offboarding:
     - build-services offboarding
 
 test:jest:
-  image: node:16-alpine
+  image: node:14-alpine
   stage: quality
   cache:
     paths:
@@ -93,9 +92,7 @@ upload:stack:
   <<: *upload_definition
   stage: upload-stack
 
-
 # Deploys - Do not edit this section -  ------------------------------------------------------------------------------------------------------------------
-
 
 deploy:dev:
   <<: *deploy_definition
