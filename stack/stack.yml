@@ -1,6 +1,5 @@
 # Stack version: ${PROJECT_NAME}-${STACK_VERSION} [${ENVIRONMENT}]
 version: '3.4'
-
 services:
   offboarding:
     dns: 8.8.8.8
@@ -9,7 +8,6 @@ services:
       # COMMON
       - ENVIRONMENT=${ENVIRONMENT}
       - DEBUG=${DEBUG}
-
       # VIUMI
       - TENANT-VIUMI_ENABLED=${TENANT-VIUMI_ENABLED}
       - VIUMI_DASHBOARD_DOMAIN=${VIUMI_DASHBOARD_DOMAIN}
@@ -17,7 +15,6 @@ services:
       - VIUMI_API_DOMAIN=${VIUMI_API_DOMAIN}
       - VIUMI_DOMAIN
       - VIUMI_TENANT_NAME
-
     deploy:
       mode: replicated
       replicas: 2
@@ -31,7 +28,6 @@ services:
         traefik.viumi.frontend.rule: 'Host:${VIUMI_DOMAIN};Path:/;ReplacePath:/${VIUMI_TENANT_NAME}'
         traefik.viumi.frontend.headers.customRequestHeaders: 'x-tenant:${VIUMI_TENANT_NAME}'
         traefik.viumi.frontend.priority: '600'
-
         traefik.frontend.entryPoints: 'https,http'
         traefik.frontend.headers.customResponseHeaders: '${CUSTOM_RESPONSE_HEADERS}'
         traefik.protocol: 'http'
@@ -46,25 +42,20 @@ services:
         traefik.frontend.headers.customFrameOptionsValue: 'SAMEORIGIN'
         traefik.frontend.headers.contentSecurityPolicy: "default-src 'self'; connect-src *; font-src *; frame-src *; img-src * data:; media-src *; object-src *; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline';"
         traefik.backend.loadbalancer.swarm: 'true'
-
         #Traefik 2.x
         traefik.docker.lbswarm: 'true'
         traefik.http.services.${ENVIRONMENT}_offboarding.loadbalancer.server.port: '3000'
-
         # MIDDLEWARES
         traefik.http.middlewares.${ENVIRONMENT}-viumi.headers.customResponseHeaders.server: 'x-tenant:${VIUMI_TENANT_NAME}'
-
         # VIUMI - MAIN
         traefik.http.routers.${ENVIRONMENT}-viumi-main.rule: 'Host(`${VIUMI_DOMAIN}`) && Path(`/`)'
         traefik.http.routers.${ENVIRONMENT}-viumi-main.entrypoints: 'web,websecure'
         traefik.http.routers.${ENVIRONMENT}-viumi-main.priority: '600'
         traefik.http.routers.${ENVIRONMENT}-viumi-main.middlewares: 'security@file,${ENVIRONMENT}-viumi@docker,${ENVIRONMENT}-viumi-main@docker'
         traefik.http.middlewares.${ENVIRONMENT}-viumi-main.replacepath.path: '/${VIUMI_TENANT_NAME}'
-
         #VIUMI - COMMON
         traefik.http.routers.${ENVIRONMENT}-viumi-common.rule: 'Host(`${VIUMI_DOMAIN}`) && PathPrefix(`/_next`,`/viumi`,`/api`)'
         traefik.http.routers.${ENVIRONMENT}-viumi-common.middlewares: 'security@file,${ENVIRONMENT}-viumi@docker'
-
     logging:
       driver: gelf
       options:
@@ -72,7 +63,6 @@ services:
         tag: ${ENVIRONMENT}-${PROJECT_NAME}
     networks:
       - ${NETWORK}
-
 networks:
   ${NETWORK}:
     external: true
