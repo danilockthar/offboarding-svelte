@@ -7,33 +7,25 @@ services:
     ports:
       - '3000:3000'
     labels:
-      traefik.enable:
-        'true'
-        #Traefik 2.x
+      traefik.enable: 'true'
       traefik.docker.lbswarm: 'true'
       traefik.http.services.dev_offboarding.loadbalancer.server.port: '3000'
-
-      # MIDDLEWARES
       traefik.http.middlewares.dev-viumi.headers.customResponseHeaders.server: 'x-tenant:viumi'
-
-      # VIUMI - MAIN
-      traefik.http.routers.dev-viumi-main.rule: 'Host(`offboarding-viumi.local.geopagos.com`) && Path(`/`)'
+      traefik.http.routers.dev-viumi-main.rule: Host(`offboarding-viumi.local.geopagos.com`) && Path(`/`)
       traefik.http.routers.dev-viumi-main.entrypoints: 'web,websecure'
       traefik.http.routers.dev-viumi-main.priority: '601'
       traefik.http.routers.dev-viumi-main.middlewares: 'dev-viumi@docker,dev-viumi-main@docker'
-      traefik.http.middlewares.dev-viumi-main.replacepath.path: '/viumi'
-
-      # VIUMI - COMMON
-      traefik.http.routers.dev_firstadata-common.rule: 'Host(`offboarding-viumi.local.geopagos.com`) && PathPrefix(`/_next`,`/viumi`,`/api`)'
-      traefik.http.routers.dev_firstadata-common.middlewares: 'dev-viumi@docker'
-
+      traefik.http.middlewares.dev-viumi-main.replacepath.path: /viumi
+      traefik.http.routers.dev_firstadata-common.rule: >-
+        Host(`offboarding-viumi.local.geopagos.com`) &&
+        PathPrefix(`/_next`,`/viumi`,`/api`)
+      traefik.http.routers.dev_firstadata-common.middlewares: dev-viumi@docker
     environment:
       - DEBUG=true
       - TENANT_VIUMI_ENABLED=true
-      - VIUMI_DASHBOARD_DOMAIN=http://dashboard-macro.local.geopagos.com
-      - VIUMI_BACKEND_DOMAIN=http://backend-macro.local.geopagos.com
-      - VIUMI_API_DOMAIN=http://backend-macro.local.geopagos.com/api
-
+      - 'VIUMI_DASHBOARD_DOMAIN=http://dashboard-macro.local.geopagos.com'
+      - 'VIUMI_BACKEND_DOMAIN=http://backend-macro.local.geopagos.com'
+      - 'VIUMI_API_DOMAIN=http://backend-macro.local.geopagos.com/api'
   traefik:
     image: 'traefik:v2.2.8'
     command:

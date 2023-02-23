@@ -1,5 +1,3 @@
---- # GLOBAL - Do not edit this section ---------------------------------------------------------------------------------------------------------------
-
 stages:
   - quality
   - build-services
@@ -11,155 +9,175 @@ stages:
   - approval-to-prod
   - approval-ops
   - deploy-prod
-
-# TEMPLATES - Do not edit this section ------------------------------------------------------------------------------------------------------------
-
-.job_build_template: &build_definition
-  image: ${CI_STACK_BUILDER_STABLE_IMAGE}
-
-.job_upload_template: &upload_definition
-  image: ${CI_STACK_UPLOADER_STABLE_IMAGE}
-  dependencies:
-    - build:stack
-  script:
+.job_build_template:
+  image: '${CI_STACK_BUILDER_STABLE_IMAGE}'
+.job_upload_template:
+  image: '${CI_STACK_UPLOADER_STABLE_IMAGE}'
+  dependencies: &ref_0
+    - 'build:stack'
+  script: &ref_1
     - uploader
   allow_failure: false
-
-.job_deploy_template: &deploy_definition
-  image: ${CI_FULL_DEPLOYER_STABLE_IMAGE}
-  dependencies:
-    - build:stack
-  script:
+.job_deploy_template:
+  image: '${CI_FULL_DEPLOYER_STABLE_IMAGE}'
+  dependencies: &ref_2
+    - 'build:stack'
+  script: &ref_3
     - deployer
   when: manual
-
-.job_only_tags: &only_tags_definition
-  only:
+.job_only_tags:
+  only: &ref_4
     - tags
-
-.job_approval_template: &approval_definition
-  image: ${CI_APPROVAL_STABLE_IMAGE}
-  only:
+.job_approval_template:
+  image: '${CI_APPROVAL_STABLE_IMAGE}'
+  only: &ref_5
     - tags
-  variables:
+  variables: &ref_6
     APPROVAL_TYPE: approve
-  script:
+  script: &ref_7
     - auth-checker
   when: manual
-
-.job_rejected_template: &rejected_definition
-  image: ${CI_APPROVAL_STABLE_IMAGE}
-  only:
+.job_rejected_template:
+  image: '${CI_APPROVAL_STABLE_IMAGE}'
+  only: &ref_8
     - tags
-  variables:
+  variables: &ref_9
     APPROVAL_TYPE: reject
-  script:
+  script: &ref_10
     - auth-checker
   when: manual
-
-# UNIT TEST & BUILD SERVICES - Only edit this section - Leave all comments intacts --------------------------------------------------------------------------
-
-build:offboarding:
-  <<: *build_definition
+'build:offboarding':
+  image: '${CI_STACK_BUILDER_STABLE_IMAGE}'
   stage: build-services
   script:
     - build-services offboarding
-
-test:jest:
-  image: node:16-alpine
+'test:jest':
+  image: 'node:16-alpine'
   stage: quality
   cache:
     paths:
       - offboarding/node_modules/
   script:
     - cd offboarding
-    - npm config set @geopagos:registry http://npm.geopagoslan.net
+    - 'npm config set @geopagos:registry http://npm.geopagoslan.net'
     - yarn
     - yarn test
-
-# STACK - Do not edit this section - ---------------------------------------------------------------------------------------------------------------------
-
-build:stack:
-  <<: *build_definition
+'build:stack':
+  image: '${CI_STACK_BUILDER_STABLE_IMAGE}'
   stage: build-stack
   artifacts:
     paths:
       - dist
   script:
     - build-stack
-
-upload:stack:
-  <<: *upload_definition
+'upload:stack':
+  image: '${CI_STACK_UPLOADER_STABLE_IMAGE}'
+  dependencies: *ref_0
+  script: *ref_1
+  allow_failure: false
   stage: upload-stack
-
-# Deploys - Do not edit this section -  ------------------------------------------------------------------------------------------------------------------
-
-deploy:dev:
-  <<: *deploy_definition
+'deploy:dev':
+  image: '${CI_FULL_DEPLOYER_STABLE_IMAGE}'
+  dependencies: *ref_2
+  script: *ref_3
+  when: manual
   stage: deploy
   environment: dev
-
-deploy:sandbox:
-  <<: *deploy_definition
-  <<: *only_tags_definition
+'deploy:sandbox':
+  image: '${CI_FULL_DEPLOYER_STABLE_IMAGE}'
+  dependencies: *ref_2
+  script: *ref_3
+  when: manual
+  only: *ref_4
   stage: deploy
   environment: sandbox
-
-deploy:test:
-  <<: *deploy_definition
-  <<: *only_tags_definition
+'deploy:test':
+  image: '${CI_FULL_DEPLOYER_STABLE_IMAGE}'
+  dependencies: *ref_2
+  script: *ref_3
+  when: manual
+  only: *ref_4
   stage: deploy
   environment: test
-
-deploy:testvolatil:
-  <<: *deploy_definition
-  <<: *only_tags_definition
+'deploy:testvolatil':
+  image: '${CI_FULL_DEPLOYER_STABLE_IMAGE}'
+  dependencies: *ref_2
+  script: *ref_3
+  when: manual
+  only: *ref_4
   stage: deploy
   environment: testvolatil
-
-approval:QA:
-  <<: *approval_definition
+'approval:QA':
+  image: '${CI_APPROVAL_STABLE_IMAGE}'
+  only: *ref_5
+  variables: *ref_6
+  script: *ref_7
+  when: manual
   stage: approval
-
-approval:RQA:
-  <<: *approval_definition
+'approval:RQA':
+  image: '${CI_APPROVAL_STABLE_IMAGE}'
+  only: *ref_5
+  variables: *ref_6
+  script: *ref_7
+  when: manual
   stage: approval
-
-rejected:QA:
-  <<: *rejected_definition
+'rejected:QA':
+  image: '${CI_APPROVAL_STABLE_IMAGE}'
+  only: *ref_8
+  variables: *ref_9
+  script: *ref_10
+  when: manual
   stage: approval
-
-deploy:preprod:
-  <<: *deploy_definition
-  <<: *only_tags_definition
+'deploy:preprod':
+  image: '${CI_FULL_DEPLOYER_STABLE_IMAGE}'
+  dependencies: *ref_2
+  script: *ref_3
+  when: manual
+  only: *ref_4
   stage: deploy-preprod
   environment: preprod
-
-deploy:demo:
-  <<: *deploy_definition
-  <<: *only_tags_definition
+'deploy:demo':
+  image: '${CI_FULL_DEPLOYER_STABLE_IMAGE}'
+  dependencies: *ref_2
+  script: *ref_3
+  when: manual
+  only: *ref_4
   stage: deploy-preprod
   environment: demo
-
-approval:TL:
-  <<: *approval_definition
+'approval:TL':
+  image: '${CI_APPROVAL_STABLE_IMAGE}'
+  only: *ref_5
+  variables: *ref_6
+  script: *ref_7
+  when: manual
   stage: approval-to-prod
-
-approval:PM:
-  <<: *approval_definition
+'approval:PM':
+  image: '${CI_APPROVAL_STABLE_IMAGE}'
+  only: *ref_5
+  variables: *ref_6
+  script: *ref_7
+  when: manual
   stage: approval-to-prod
-
-approval:OP:
-  <<: *approval_definition
+'approval:OP':
+  image: '${CI_APPROVAL_STABLE_IMAGE}'
+  only: *ref_5
+  variables: *ref_6
+  script: *ref_7
+  when: manual
   stage: approval-ops
   allow_failure: false
-
-rejected:OP:
-  <<: *rejected_definition
+'rejected:OP':
+  image: '${CI_APPROVAL_STABLE_IMAGE}'
+  only: *ref_8
+  variables: *ref_9
+  script: *ref_10
+  when: manual
   stage: approval-ops
-
-deploy:prod:
-  <<: *deploy_definition
-  <<: *only_tags_definition
+'deploy:prod':
+  image: '${CI_FULL_DEPLOYER_STABLE_IMAGE}'
+  dependencies: *ref_2
+  script: *ref_3
+  when: manual
+  only: *ref_4
   stage: deploy-prod
   environment: prod
