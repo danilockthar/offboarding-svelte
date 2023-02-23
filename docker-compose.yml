@@ -24,7 +24,7 @@ services:
       traefik.http.middlewares.dev-viumi-main.replacepath.path: '/viumi'
 
       # VIUMI - COMMON
-      traefik.http.routers.dev_firstadata-common.rule: 'Host(`offboarding-viumi.local.geopagos.com`) && PathPrefix(`/_next`,`/viumi`,`/api`)'
+      traefik.http.routers.dev_firstadata-common.rule: 'Host(`offboarding-viumi.local.geopagos.com`) && PathPrefix(`/assets`,`/_app`,`/viumi`,`/api`)'
       traefik.http.routers.dev_firstadata-common.middlewares: 'dev-viumi@docker'
 
     environment:

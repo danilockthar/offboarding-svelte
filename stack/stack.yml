@@ -62,7 +62,7 @@ services:
         traefik.http.middlewares.${ENVIRONMENT}-viumi-main.replacepath.path: '/${VIUMI_TENANT_NAME}'
 
         #VIUMI - COMMON
-        traefik.http.routers.${ENVIRONMENT}-viumi-common.rule: 'Host(`${VIUMI_DOMAIN}`) && PathPrefix(`/_next`,`/viumi`,`/api`)'
+        traefik.http.routers.${ENVIRONMENT}-viumi-common.rule: 'Host(`${VIUMI_DOMAIN}`) && PathPrefix(`/viumi`)'
         traefik.http.routers.${ENVIRONMENT}-viumi-common.middlewares: 'security@file,${ENVIRONMENT}-viumi@docker'
 
     logging:
