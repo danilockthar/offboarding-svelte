@@ -57,6 +57,7 @@ stages:
     - auth-checker
   when: manual
 
+
 # UNIT TEST & BUILD SERVICES - Only edit this section - Leave all comments intacts --------------------------------------------------------------------------
 
 build:offboarding:
@@ -92,7 +93,9 @@ upload:stack:
   <<: *upload_definition
   stage: upload-stack
 
+
 # Deploys - Do not edit this section -  ------------------------------------------------------------------------------------------------------------------
+
 
 deploy:dev:
   <<: *deploy_definition
