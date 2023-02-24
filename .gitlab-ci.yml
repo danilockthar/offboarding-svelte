@@ -85,7 +85,7 @@ build:stack:
   stage: build-stack
   artifacts:
     paths:
-      - dist
+      - build
   script:
     - build-stack
 
