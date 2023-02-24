@@ -3,7 +3,7 @@ version: '3.4'
 
 services:
   offboarding:
-    dns: 8.8.8.8
+    dns: '8.8.8.8'
     image: ${IMAGE:offboarding}
     environment:
       # COMMON
