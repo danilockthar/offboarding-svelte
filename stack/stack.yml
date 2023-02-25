@@ -27,10 +27,18 @@ services:
         "traefik.enable": "true"
         "traefik.backend.loadbalancer.swarm": "true"
         "traefik.docker.lbswarm": "true"
-        "traefik.http.services.${ENVIRONMENT}_offboarding-${VIUMI_TENANT_NAME}.loadbalancer.server.port": "3000"
-        "traefik.http.routers.${ENVIRONMENT}_offboarding-${VIUMI_TENANT_NAME}.rule": "Host(`${VIUMI_DOMAIN}`)"
-        "traefik.http.routers.${ENVIRONMENT}_offboarding-${VIUMI_TENANT_NAME}.entrypoints": "web,websecure"
-        "traefik.http.routers.${ENVIRONMENT}_offboarding-${VIUMI_TENANT_NAME}.middlewares": "security@file"
+        "traefik.http.services.${ENVIRONMENT}_offboarding.loadbalancer.server.port": "3000"
+        
+        # VIUMI
+        "traefik.http.routers.${ENVIRONMENT}_${VIUMI_TENANT_NAME}.rule": "Host(`${VIUMI_DOMAIN}`) && Path(`/`)"
+        "traefik.http.routers.${ENVIRONMENT}_${VIUMI_TENANT_NAME}.entrypoints": "web,websecure"
+        "traefik.http.routers.${ENVIRONMENT}_${VIUMI_TENANT_NAME}.middlewares": "security@file"
+        "traefik.http.middlewares.${ENVIRONMENT}_${VIUMI_TENANT_NAME}-main.replacepath.path": "/viumi"
+
+        # VIUMI - COMMON
+        "traefik.http.routers.${ENVIRONMENT}_${VIUMI_TENANT_NAME}-common.rule": 'Host(`${VIUMI_DOMAIN}`) && PathPrefix(`/assets`,`/_app`,`/viumi`,`/api`)'
+        "traefik.http.routers.${ENVIRONMENT}_${VIUMI_TENANT_NAME}-common.middlewares": '${ENVIRONMENT}-viumi@docker'
+
       "placement":
         "constraints":
           - "node.labels.type == ${WORKER_COMPUTE_TYPE}"
@@ -38,7 +46,7 @@ services:
       "driver": "gelf"
       "options":
         "gelf-address": "udp://localhost:12204"
-        "tag": "${ENVIRONMENT}-offboarding-${VIUMI_TENANT_NAME}"
+        "tag": "${ENVIRONMENT}-offboarding"
     "networks":
       - "${NETWORK}"
 
