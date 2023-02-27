@@ -26,6 +26,7 @@
 
 <svelte:component this={layouts[data.tenant]} tenant={data.tenant}>
 	<!--<slot /> -->
+	{JSON.stringify(data.response)}
 	{#each data.config[status_message] as component}
 		{#if component.component === 'Text'}
 			<Text {...component} />
