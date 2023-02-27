@@ -1,6 +1,8 @@
 # GLOBAL - Do not edit this section ---------------------------------------------------------------------------------------------------------------
 
 stages:
+  - quality
+  - build-services
   - build-stack
   - upload-stack
   - deploy
@@ -57,6 +59,24 @@ stages:
 
 
 # UNIT TEST & BUILD SERVICES - Only edit this section - Leave all comments intacts --------------------------------------------------------------------------
+
+build:offboarding:
+  <<: *build_definition
+  stage: build-services
+  script:
+    - build-services offboarding
+
+test:jest:
+  image: node:16-alpine
+  stage: quality
+  cache:
+    paths:
+      - offboarding/node_modules/
+  script:
+    - cd offboarding
+    - npm config set @geopagos:registry http://npm.geopagoslan.net
+    - yarn
+    - yarn test
 
 # STACK - Do not edit this section - ---------------------------------------------------------------------------------------------------------------------
 
