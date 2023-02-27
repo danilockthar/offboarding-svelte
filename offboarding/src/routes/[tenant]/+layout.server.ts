@@ -15,7 +15,7 @@ export async function load({ params, fetch }: any) {
 			'X-Tenant': 'macro'
 		}
 	});
-	const mockResponse = { message: '$500.50', status: 'PENDING_DEPOSIT' };
+	const mockResponse = { message: '$1000.50', status: 'PENDING_DEPOSIT' };
 	const config = await fetch(`/api/get-config`, {
 		method: 'POST',
 		body: JSON.stringify({ tenant: params.tenant }),
