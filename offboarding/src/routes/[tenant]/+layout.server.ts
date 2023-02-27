@@ -6,16 +6,16 @@ export async function load({ params, fetch }: any) {
 	if (!tenants.includes(params.tenant)) {
 		throw error(404, 'Not found');
 	}
-	const res = await fetch('http://api-macro.test.geopagos.com/api/v1.0/CanUnsubscribe/', {
+	const res = await fetch('https://api-macro.dev.geopagos.com/api/v1.0/CanUnsubscribe/', {
 		method: 'POST',
-		body: JSON.stringify({ merchant_id: 52 }),
+		body: JSON.stringify({ merchant_id: 388 }),
 		headers: {
 			'X-Authentication-Token':
-				'pt_d24d2b9147fad36299cbdf24cab52e7dd11f6c0c0536442b4b91fb6d4d595200',
+				'pt_450df86130c0c317b5a1793fd0d6a1306d1d83373fc7478035335a1b2e54a4c9',
 			'X-Tenant': 'macro'
 		}
 	});
-	const mockResponse = { message: '$1000.50', status: 'PENDING_DEPOSIT' };
+	const mockResponse = { message: '$1000.50', status_code: 'PENDING_DEPOSIT' };
 	const config = await fetch(`/api/get-config`, {
 		method: 'POST',
 		body: JSON.stringify({ tenant: params.tenant }),
@@ -23,7 +23,6 @@ export async function load({ params, fetch }: any) {
 			'Content-Type': 'application/json'
 		}
 	});
-	response_data.set(mockResponse);
 	const { data } = await config.json();
 	if (!res.ok) {
 		return {
@@ -32,4 +31,11 @@ export async function load({ params, fetch }: any) {
 			config: data
 		};
 	}
+
+	const response = await res.json();
+	return {
+		tenant: params.tenant,
+		response,
+		config: data
+	};
 }

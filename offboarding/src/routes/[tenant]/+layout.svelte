@@ -19,7 +19,9 @@
 	/**@type {string}*/
 	let status_message;
 	// @ts-ignore
-	response_data.subscribe((value) => (status_message = value.status));
+	response_data.subscribe((value) => (status_message = value.status_code));
+
+	console.log(data.response)
 </script>
 
 <svelte:component this={layouts[data.tenant]} tenant={data.tenant}>
