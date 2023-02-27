@@ -27,13 +27,12 @@ services:
         "traefik.enable": "true"
         "traefik.backend.loadbalancer.swarm": "true"
         "traefik.docker.lbswarm": "true"
-        "traefik.http.services.${ENVIRONMENT}_offboarding.loadbalancer.server.port": "3000"
-        
+        "traefik.http.services.${ENVIRONMENT}_offboarding-${VIUMI_TENANT_NAME}.loadbalancer.server.port": "3000"
         # VIUMI
         "traefik.http.routers.${ENVIRONMENT}_${VIUMI_TENANT_NAME}.rule": "Host(`${VIUMI_DOMAIN}`) && Path(`/`)"
         "traefik.http.routers.${ENVIRONMENT}_${VIUMI_TENANT_NAME}.entrypoints": "web,websecure"
         "traefik.http.routers.${ENVIRONMENT}_${VIUMI_TENANT_NAME}.middlewares": "security@file"
-        "traefik.http.middlewares.${ENVIRONMENT}_${VIUMI_TENANT_NAME}-main.replacepath.path": "/${VIUMI_TENANT_NAME}"
+        "traefik.http.middlewares.${ENVIRONMENT}_${VIUMI_TENANT_NAME}.replacepath.path": "/${VIUMI_TENANT_NAME}"
 
         # VIUMI - COMMON
         "traefik.http.routers.${ENVIRONMENT}_${VIUMI_TENANT_NAME}-common.rule": 'Host(`${VIUMI_DOMAIN}`) && PathPrefix(`/assets`,`/_app`,`/viumi`,`/api`)'
