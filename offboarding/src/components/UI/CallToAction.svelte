@@ -22,11 +22,12 @@
 	/**
 	 * @type {any}
 	 */
-	 export let binded_dependency;
+	 export let isDisabled = false;
 	if(depends_on){
 		store.subscribe((value => {
 			// @ts-ignore
-			binded_dependency = value[depends_on]}))
+			isDisabled = !value[depends_on] 
+		}))
 	}
 
 	const goback = () => false;
@@ -37,7 +38,7 @@
 </script>
 {#if modal}
 	<Modal on:close={() => (isModalOpen = false)} {...modal} {isModalOpen} {tenant} />
-	<button id={`${id}-modal-title`} disabled={binded_dependency === null ? false : !binded_dependency} style={binded_dependency === false  && 'background-color:#A8A8A8'} on:click={() => (isModalOpen = true)}> {value} </button>
+	<button id={`${id}-modal-title`} disabled={isDisabled} class={isDisabled === true?  'disabled-btn': null} on:click={() => (isModalOpen = true)}> {value} </button>
 {:else}
 <button {id} on:click={actions[action]}>
 	{#if icon}

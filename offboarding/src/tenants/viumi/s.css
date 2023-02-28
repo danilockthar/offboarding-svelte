@@ -26,6 +26,9 @@
 	button {
 		transition: 0.3s !important;
 	}
+	.disabled-btn {
+		background-color: #a8a8a8 !important;
+	}
 	/* ... */
 }
 
