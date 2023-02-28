@@ -5,7 +5,9 @@
 	import CallToAction from '../../components/UI/CallToAction.svelte';
 	import ImportantInfo from '../../components/UI/ImportantInfo.svelte';
 	import Text from '../../components/UI/Text.svelte';
+	import Checkbox from '../../components/UI/Checkbox.svelte';
 	import { response_data } from '../../services/store';
+	import Modal from '../../components/UI/Modal.svelte';
 
 	/**@type {Record<string,any>}*/
 	const layouts = {
@@ -29,11 +31,17 @@
 		{#if component.component === 'Text'}
 			<Text {...component} />
 		{/if}
+		{#if component.component === 'Checkbox'}
+		<Checkbox {...component} />
+		{/if}
+		{#if component.component === 'Modal'}
+		<Modal {...component} tenant={data.tenant}/>
+		{/if}
 		{#if component.component === 'ImportantInfo'}
 			<ImportantInfo {...component} tenant={data.tenant} />
 		{/if}
 		{#if component.component === 'CallToAction'}
-			<CallToAction {...component} />
+			<CallToAction {...component} tenant={data.tenant}/>
 		{/if}
 	{/each}
 </svelte:component>

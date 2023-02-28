@@ -1,10 +1,4 @@
 {
-	"cannot-operate": [
-		{
-			"component": "title",
-			"value": "no puede operar"
-		}
-	],
 	"OK": [
 		{
 			"component": "CallToAction",
@@ -15,13 +9,81 @@
 		{
 			"component": "Text",
 			"id": "title-viumi",
-			"value": "SUCCESS OK!!",
+			"value": "¿Querés eliminar tu cuenta viüMi?",
+			"type": "h1"
+		},
+		{
+			"component": "Text",
+			"value": "Tené en cuenta que:"
+		},
+		{
+			"component": "Text",
+			"type": "html",
+			"value": "<ul><li style='margin-bottom:15px;'>Tu servicio de lector de tarjetas y tarjeta prepaga se dar&aacute;n de baja.</li><li>Tus datos se borrarán de manera permanente y no volverás a acceder a tu cuenta. </li></ul>"
+		},
+		{
+			"component": "Text",
+			"type": "html",
+			"value": "<p>Record&aacute; que con vi&uuml;Mi ten&eacute;s m&uacute;ltiples beneficios. Conoce m&aacute;s en <a href='http://www.viumi.com.ar' target='_blank' style='color:#4527A0;font-weight:600;'>www.viumi.com.ar</a></p>"
+		},
+		{
+			"component": "Text",
+			"type": "html",
+			"value": "<p>&iquest;Ten&eacute;s alguna duda o inconveniente? Podemos ayudarte. Llamanos al <a href='tel:0810-345-4222' style='color:#4527A0;font-weight:600;'>0810-345-4222</a> o envianos un e-mail a <a href='mailto:consultas@viumi.com.ar' style='color:#4527A0;font-weight:600;'>consultas@viumi.com.ar</a></p>"
+		},
+		{
+			"component": "Checkbox",
+			"key": "agreed-check",
+			"value": false,
+			"text": "Estoy de acuerdo",
+			"id": "agree-checkbox"
+		},
+		{
+			"component": "CallToAction",
+			"id": "delete-account-with-modal",
+			"value": "Eliminar mi cuenta",
+			"depends_on": "agreed-check",
+			"modal": {
+				"modalTitle": "¿Estás seguro de eliminar tu cuenta viüMi?",
+				"modalBody": "Tené en cuenta que al hacerlo ya no podrás operar en nuestros sitios, perderás tu nombre de usuario y tus beneficios.",
+				"footer": [
+					{
+						"id": "stay-in",
+						"action": "close",
+						"text": "Eliminar mi cuenta"
+					},
+					{
+						"id": "close-modal-btn",
+						"action": "close",
+						"text": "Quedarme en viüMi"
+					}
+				]
+			}
+		},
+		{
+			"component": "CallToAction",
+			"id": "stay-in-viumi",
+			"value": "Quedarme en viüMi",
+			"action": "goback"
+		}
+	],
+	"DEPOSIT_PENDING": [
+		{
+			"component": "CallToAction",
+			"id": "back-icon-viumi",
+			"action": "goback",
+			"icon": "arrow-back"
+		},
+		{
+			"component": "Text",
+			"id": "title-viumi",
+			"value": "¿Querés eliminar tu cuenta viüMi?",
 			"type": "h1"
 		},
 		{
 			"component": "ImportantInfo",
 			"id": "important-info-component",
-			"primaryText": "Tenés <b>{{message}}</b> de saldo disponible. Para eliminar tu cuenta viüMi, primero tenés que retirar tu dinero.",
+			"primaryText": "Tenés saldo a liberar, estará disponible en tu billetera virtual el {{message}}. Para eliminar tu cuenta, primero tenés que retirar tu dinero.",
 			"modal": {
 				"modalTitle": "¿Cómo retiro mi dinero?",
 				"modalBody": "<p><strong><span style='color: #4527a0;'>Por transferencia</span></strong>: Pod&eacute;s retirar tu dinero disponible desde tu app vi&uuml;Mi por transferencias a otras cuentas bancarias o virtuales en la secci&oacute;n Cuenta &gt; Retirar.</p><br/><p><strong><span style='color: #4527a0;'>Por cajero autom&aacute;tico</span></strong>: Pod&eacute;s realizar extracciones en cajeros autom&aacute;ticos Banelco o Link con tu tarjeta prepaga vi&uuml;Mi</p>",
@@ -65,7 +127,7 @@
 			"action": "goback"
 		}
 	],
-	"PENDING_DEPOSIT": [
+	"HAS_BALANCE": [
 		{
 			"component": "CallToAction",
 			"id": "back-icon-viumi",
@@ -87,17 +149,100 @@
 				"modalBody": "<p><strong><span style='color: #4527a0;'>Por transferencia</span></strong>: Pod&eacute;s retirar tu dinero disponible desde tu app vi&uuml;Mi por transferencias a otras cuentas bancarias o virtuales en la secci&oacute;n Cuenta &gt; Retirar.</p><br/><p><strong><span style='color: #4527a0;'>Por cajero autom&aacute;tico</span></strong>: Pod&eacute;s realizar extracciones en cajeros autom&aacute;ticos Banelco o Link con tu tarjeta prepaga vi&uuml;Mi</p>",
 				"footer": [
 					{
-						"id": "stay-in",
-						"action": "close",
-						"text": "Quedarme en viumi"
-					},
-					{
 						"id": "close-modal-btn",
 						"action": "close",
 						"text": "Cerrar"
 					}
 				]
 			}
+		},
+		{
+			"component": "Text",
+			"value": "Tené en cuenta que:"
+		},
+		{
+			"component": "Text",
+			"type": "html",
+			"value": "<ul><li style='margin-bottom:15px;'>Tu servicio de lector de tarjetas y tarjeta prepaga se dar&aacute;n de baja.</li><li>Tus datos se borrarán de manera permanente y no volverás a acceder a tu cuenta. </li></ul>"
+		},
+		{
+			"component": "Text",
+			"type": "html",
+			"value": "<p>Record&aacute; que con vi&uuml;Mi ten&eacute;s m&uacute;ltiples beneficios. Conoce m&aacute;s en <a href='http://www.viumi.com.ar' target='_blank' style='color:#4527A0;font-weight:600;'>www.viumi.com.ar</a></p>"
+		},
+		{
+			"component": "Text",
+			"type": "html",
+			"value": "<p>&iquest;Ten&eacute;s alguna duda o inconveniente? Podemos ayudarte. Llamanos al <a href='tel:0810-345-4222' style='color:#4527A0;font-weight:600;'>0810-345-4222</a> o envianos un e-mail a <a href='mailto:consultas@viumi.com.ar' style='color:#4527A0;font-weight:600;'>consultas@viumi.com.ar</a></p>"
+		},
+		{
+			"component": "CallToAction",
+			"id": "back-button-viumi",
+			"value": "Volver",
+			"action": "goback"
+		}
+	],
+	"ERROR": [
+		{
+			"component": "CallToAction",
+			"id": "back-icon-viumi",
+			"action": "goback",
+			"icon": "arrow-back"
+		},
+		{
+			"component": "Text",
+			"id": "title-viumi",
+			"value": "¿Querés eliminar tu cuenta viüMi?",
+			"type": "h1"
+		},
+		{
+			"component": "ImportantInfo",
+			"id": "important-info-component",
+			"primaryText": "<p>En este momento no podemos enviar tu solicitud. Intentalo más tarde o comunicate con nosotros al <a href='tel:0810-345-4222' style='color:#4527A0;font-weight:600;'>0810-345-4222</a>.</p>"
+		},
+		{
+			"component": "Text",
+			"value": "Tené en cuenta que:"
+		},
+		{
+			"component": "Text",
+			"type": "html",
+			"value": "<ul><li style='margin-bottom:15px;'>Tu servicio de lector de tarjetas y tarjeta prepaga se dar&aacute;n de baja.</li><li>Tus datos se borrarán de manera permanente y no volverás a acceder a tu cuenta. </li></ul>"
+		},
+		{
+			"component": "Text",
+			"type": "html",
+			"value": "<p>Record&aacute; que con vi&uuml;Mi ten&eacute;s m&uacute;ltiples beneficios. Conoce m&aacute;s en <a href='http://www.viumi.com.ar' target='_blank' style='color:#4527A0;font-weight:600;'>www.viumi.com.ar</a></p>"
+		},
+		{
+			"component": "Text",
+			"type": "html",
+			"value": "<p>&iquest;Ten&eacute;s alguna duda o inconveniente? Podemos ayudarte. Llamanos al <a href='tel:0810-345-4222' style='color:#4527A0;font-weight:600;'>0810-345-4222</a> o envianos un e-mail a <a href='mailto:consultas@viumi.com.ar' style='color:#4527A0;font-weight:600;'>consultas@viumi.com.ar</a></p>"
+		},
+		{
+			"component": "CallToAction",
+			"id": "back-button-viumi",
+			"value": "Volver",
+			"action": "goback"
+		}
+	],
+	"400": [
+		{
+			"component": "CallToAction",
+			"id": "back-icon-viumi",
+			"action": "goback",
+			"icon": "arrow-back"
+		},
+		{
+			"component": "Text",
+			"id": "title-viumi",
+			"value": "¿Querés eliminar tu cuenta viüMi?",
+			"type": "h1"
+		},
+		{
+			"component": "ImportantInfo",
+			"id": "important-info-component",
+			"primaryText": "<p>En este momento no podemos enviar tu solicitud. Intentalo más tarde o comunicate con nosotros al <a href='tel:0810-345-4222' style='color:#4527A0;font-weight:600;'>0810-345-4222</a>.</p>"
 		},
 		{
 			"component": "Text",

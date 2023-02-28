@@ -21,7 +21,6 @@
 		close: close
 	};
 </script>
-
 <div class="fixed w-screen h-screen bg-[#00000057] top-0 left-0 {isModalOpen ? 'block' : 'hidden'}">
 	<div
 		id="dialog-modal"

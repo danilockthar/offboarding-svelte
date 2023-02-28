@@ -15,77 +15,66 @@
 	h3 {
 		@apply text-xl;
 	}
+	ul {
+		padding: 0.5rem;
+	}
 	ul,
 	ol {
 		list-style: revert;
 		list-style-position: inside;
+	}
+	button {
+		transition: 0.3s !important;
 	}
 	/* ... */
 }
 
 @layer components {
 	#title-viumi {
-		@apply text-left;
-		@apply lg:text-center;
-		@apply text-[#2B2B2B];
-		@apply font-[500];
+		@apply text-left lg:text-center text-[#2B2B2B] font-[500];
 	}
 	#important-info-component {
 		@apply bg-[#f6f4fa];
 	}
 	#modal-title {
-		@apply text-[#4527A0];
-		@apply font-bold;
-		@apply justify-self-start;
+		@apply text-[#4527A0] font-bold justify-self-start;
 	}
 	#dialog-modal {
 		@apply rounded-md;
 	}
 	#diagol-modal-footer {
-		@apply flex;
-		@apply justify-center;
-		@apply flex-col;
-		@apply lg:flex-row;
-		@apply gap-y-4;
-		@apply lg:gap-y-0;
-		@apply gap-x-4;
-		@apply lg:justify-end;
-		@apply pt-4;
-		@apply pb-0;
-		@apply pl-0;
-		@apply pr-0;
-		@apply lg:pr-4;
-		@apply border-t;
-		@apply border-[#0000000d];
+		@apply flex justify-center flex-col lg:flex-row gap-y-4 lg:gap-y-0 gap-x-4;
+		@apply lg:justify-end pt-4 pb-0 pl-0 pr-0 lg:pr-4 border-t border-[#0000000d];
 	}
 	#close-modal-btn {
-		@apply text-[#4527A0];
-		@apply font-bold;
+		@apply text-[#4527A0] font-bold;
 	}
 	#back-button-viumi {
-		@apply lg:text-center;
-		@apply text-[#4527A0];
-		@apply font-bold;
-		@apply mt-6;
-		@apply w-fit;
-		@apply justify-self-center;
+		@apply lg:text-center text-[#4527A0] font-bold mt-6 w-fit justify-self-center;
 	}
 	#back-icon-viumi {
-		@apply hidden;
-		@apply justify-self-start;
-		@apply lg:block;
+		@apply hidden justify-self-start lg:block;
 	}
 	#close-modal-btn-2 {
-		color: red;
+		@apply text-[red];
 		text-decoration: dashed;
 	}
 	#stay-in {
-		@apply text-white;
-		@apply font-bold;
-		@apply bg-[#4527A0];
-		@apply p-2;
-		@apply lg:py-2;
-		@apply lg:px-6;
-		@apply rounded-[20px];
+		@apply text-white font-bold bg-[#4527A0] p-2 lg:py-2 lg:px-6 rounded-[20px];
+	}
+	#agree-checkbox {
+		@apply w-fit grid grid-cols-[min-content_1fr] gap-x-2 mt-2;
+	}
+	#agree-checkbox-input {
+		@apply w-4 rounded;
+	}
+	#agree-checkbox-input:checked {
+		@apply accent-[#4527a0];
+	}
+	#delete-account-with-modal-modal-title {
+		@apply text-white font-bold bg-[#4527A0] p-2 lg:py-2 lg:px-6 rounded-[20px] lg:w-80 lg:justify-self-center;
+	}
+	#stay-in-viumi {
+		@apply lg:text-center text-[#4527A0] font-bold w-fit justify-self-center;
 	}
 }
