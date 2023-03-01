@@ -1,4 +1,4 @@
-export const canUnsubscribe = () => {
+export const canUnsubscribe = (account_id: number | string) => {
 	const myHeaders = new Headers();
 	myHeaders.append(
 		'X-Authentication-Token',
@@ -8,7 +8,7 @@ export const canUnsubscribe = () => {
 	myHeaders.append('Content-Type', 'application/json');
 
 	const raw = JSON.stringify({
-		merchant_id: 388
+		merchant_id: account_id
 	});
 
 	/**@type {Record<string, any>} */

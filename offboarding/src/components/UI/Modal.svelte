@@ -1,7 +1,7 @@
 <script>
 	import { createEventDispatcher, onDestroy } from 'svelte';
 	import { createMutation,useIsMutating } from '@tanstack/svelte-query'
-	import { response_data } from '../../services/store';
+	import { response_data, store } from '../../services/store';
 	import { unsubscribe } from '../../services/unsubscribe';
 
 	/**@type {string}*/
@@ -20,18 +20,24 @@
 	const close = () => {
 		dispatch('close');
 	};
-	
-	/* const addMutation = createMutation({
-    mutationFn: unsubscribe,
-    onSuccess: async(data) => {
-		console.log(await data.json())
-    },
-  }) */
+
+  	/**@type {string}*/
+  	let token;
+	/**@type {string | number}*/
+	let account_id;
+	store.subscribe(values => {
+		console.log(values)
+		  // @ts-ignore
+		token = values.token;
+		  // @ts-ignore
+		account_id = values.account_id;
+	})
 
   	const unsubscribeFc = async () => {
+		if(!token || !account_id) return false
 		isLoading = true
 		try {
-			const response = await unsubscribe();
+			const response = await unsubscribe(token, account_id);
 			const data = await response.json();
 			response_data.set({message:data.message, status_code:'SUCCESS'})
 			isLoading = false

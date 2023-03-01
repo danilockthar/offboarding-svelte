@@ -6,14 +6,25 @@
     export let value;
     /**@type {string}*/
     export let key;
-    store.set({[key]:value})
+    store.update(values => {
+        return {
+            [key]:value,
+            ...values
+        }
+        })
     /**@type {string}*/
     export let text;
 
 	/**@type {string}*/
     export let id;
 
-    const handleChange = () => store.set({[key]:value})
+    const handleChange = () => store.update(values => {
+        console.log(key, value)
+        return {
+            ...values,
+            [key]:value,
+        }
+        })
 </script>
 
 <label {id}>

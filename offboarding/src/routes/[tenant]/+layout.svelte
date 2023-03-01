@@ -6,7 +6,7 @@
 	import ImportantInfo from '../../components/UI/ImportantInfo.svelte';
 	import Text from '../../components/UI/Text.svelte';
 	import Checkbox from '../../components/UI/Checkbox.svelte';
-	import { response_data } from '../../services/store';
+	import { response_data, store } from '../../services/store';
 	import Modal from '../../components/UI/Modal.svelte';
 	import { QueryClientProvider, QueryClient } from '@tanstack/svelte-query'
 	import { browser } from '$app/environment'
@@ -26,7 +26,13 @@
 	let status_message;
 	// @ts-ignore
 	response_data.subscribe((value) => (status_message = value.status_code));
-
+	store.update((prev) => {
+		return {
+			...prev,
+			account_id: data.account,
+			token: data.token,
+		}
+	} )
 	export const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
