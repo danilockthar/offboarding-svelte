@@ -1,6 +1,7 @@
 <script>
+	import { containsHTML } from '$lib/containsHtml';
+	import { replaceTags } from '$lib/replaceTags';
 	import { getContext } from 'svelte';
-	import { replaceTags } from '../../lib/replaceTags';
 	import { response_data } from '../../services/store';
 	import Modal from './Modal.svelte';
 
@@ -26,9 +27,13 @@
 </script>
 
 <div {id} style="background-color:{bgColor}" class="grid p-4 grid-cols-[35px_1fr] h-fit">
-	<img src={`/${tenant}/assets/icon_alert.png`} alt="Important information" />
+	<img src={`/${tenant}/assets/icon_alert.svg`} alt="Important information" />
 	<div class="grid gap-y-4">
-		<p>{@html primaryText}</p>
+		{#if containsHTML(primaryText)}
+			{@html primaryText}
+		{:else}
+			<p> {primaryText}</p>
+		{/if}
 		{#if modal}
 			<Modal on:close={() => (isModalOpen = false)} {...modal} {isModalOpen} {tenant} />
 			<button id={'modal-title'} on:click={() => (isModalOpen = true)}> {modal.modalTitle} </button>
