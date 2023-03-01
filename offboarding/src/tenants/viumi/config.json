@@ -1,4 +1,38 @@
 {
+	"SUCCESS": [
+		{
+			"component": "Image",
+			"src": "success_image",
+			"id": "success_image"
+		},
+		{
+			"component": "Text",
+			"id": "title-viumi",
+			"value": "Tu solicitud de baja de cuenta fue enviada",
+			"type": "h1"
+		},
+		{
+			"component": "Text",
+			"id": "description-success",
+			"type": "html",
+			"value": "<p>Tu número de gestión es <b>{{message}}</b>.</p>"
+		},
+		{
+			"component": "Text",
+			"value": "Gracias por haber sido parte de la experiencia viüMi ¡Te vamos a extrañar!"
+		},
+		{
+			"component": "Text",
+			"type": "html",
+			"value": "<p>&iquest;Ten&eacute;s alguna duda o inconveniente? Podemos ayudarte. Llamanos al <a href='tel:0810-345-4222' style='color:#4527A0;font-weight:600;'>0810-345-4222</a> o envianos un e-mail a <a href='mailto:consultas@viumi.com.ar' style='color:#4527A0;font-weight:600;'>consultas@viumi.com.ar</a></p>"
+		},
+		{
+			"component": "CallToAction",
+			"id": "back-button-success",
+			"value": "Salir",
+			"action": "goback"
+		}
+	],
 	"OK": [
 		{
 			"component": "CallToAction",
@@ -49,7 +83,7 @@
 				"footer": [
 					{
 						"id": "stay-in",
-						"action": "close",
+						"action": "unsubscribe",
 						"text": "Eliminar mi cuenta"
 					},
 					{

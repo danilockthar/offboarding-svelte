@@ -29,6 +29,10 @@
 	.disabled-btn {
 		background-color: #a8a8a8 !important;
 	}
+	.loadersvg {
+		width: 15px;
+		align-self: center;
+	}
 	/* ... */
 }
 
@@ -55,6 +59,9 @@
 	#back-button-viumi {
 		@apply lg:text-center text-[#4527A0] font-bold mt-6 w-fit justify-self-center;
 	}
+	#back-button-success {
+		@apply lg:text-center text-[#4527A0] font-bold mt-6 w-fit justify-self-center lg:hidden;
+	}
 	#back-icon-viumi {
 		@apply hidden justify-self-start lg:block;
 	}
@@ -64,6 +71,9 @@
 	}
 	#stay-in {
 		@apply text-white font-bold bg-[#4527A0] p-2 lg:py-2 lg:px-6 rounded-[20px];
+		display: flex;
+		justify-content: space-around;
+		gap: 0.5rem;
 	}
 	#agree-checkbox {
 		@apply w-fit grid grid-cols-[min-content_1fr] gap-x-2 mt-2;
@@ -79,5 +89,9 @@
 	}
 	#stay-in-viumi {
 		@apply lg:text-center text-[#4527A0] font-bold w-fit justify-self-center;
+	}
+	#success_image {
+		justify-self: center;
+		margin-bottom: 15px;
 	}
 }

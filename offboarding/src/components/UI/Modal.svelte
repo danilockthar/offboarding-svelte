@@ -1,5 +1,8 @@
 <script>
 	import { createEventDispatcher, onDestroy } from 'svelte';
+	import { createMutation,useIsMutating } from '@tanstack/svelte-query'
+	import { response_data } from '../../services/store';
+	import { unsubscribe } from '../../services/unsubscribe';
 
 	/**@type {string}*/
 	export let tenant;
@@ -12,15 +15,43 @@
 	/**@type {Array<Record<string, string>>}*/
 	export let footer;
 
+	let isLoading = false;
 	const dispatch = createEventDispatcher();
 	const close = () => {
 		dispatch('close');
 	};
+	
+	/* const addMutation = createMutation({
+    mutationFn: unsubscribe,
+    onSuccess: async(data) => {
+		console.log(await data.json())
+    },
+  }) */
+
+  	const unsubscribeFc = async () => {
+		isLoading = true
+		try {
+			const response = await unsubscribe();
+			const data = await response.json();
+			response_data.set({message:data.message, status_code:'SUCCESS'})
+			isLoading = false
+		} catch (error) {
+			isLoading = false
+			console.log(error)
+		}
+	}
+
 	/**@type {Record<string, () => void>}*/
 	const actions = {
-		close: close
+		close: close,
+		unsubscribe: unsubscribeFc
 	};
 </script>
+<!-- {$addMutation.status === 'loading'
+? 'Saving...'
+: $addMutation.status === 'error'
+? $addMutation.error.message
+: 'Saved!'} -->
 <div class="fixed w-screen h-screen bg-[#00000057] top-0 left-0 {isModalOpen ? 'block' : 'hidden'}">
 	<div
 		id="dialog-modal"
@@ -41,7 +72,12 @@
 		</div>
 		<div id="diagol-modal-footer">
 			{#each footer as elem}
-				<button id={elem.id} on:click={actions[elem.action]}>{elem.text}</button>
+				<button id={elem.id} on:click={actions[elem.action]}> 
+					{elem.text}  
+					{#if isLoading && elem.action !== 'close'}
+					<img class="loadersvg"  src="/assets/loader.svg" alt="loader svg"/> 
+					{/if}
+				</button>
 			{/each}
 		</div>
 	</div>

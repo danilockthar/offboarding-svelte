@@ -8,6 +8,10 @@
 	import Checkbox from '../../components/UI/Checkbox.svelte';
 	import { response_data } from '../../services/store';
 	import Modal from '../../components/UI/Modal.svelte';
+	import { QueryClientProvider, QueryClient } from '@tanstack/svelte-query'
+	import { browser } from '$app/environment'
+	import Image from '../../components/UI/Image.svelte';
+
 
 	/**@type {Record<string,any>}*/
 	const layouts = {
@@ -23,13 +27,25 @@
 	// @ts-ignore
 	response_data.subscribe((value) => (status_message = value.status_code));
 
+	export const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        enabled: browser,
+      },
+    },
+  })
+
 </script>
 
+<QueryClientProvider client={queryClient}>
 <svelte:component this={layouts[data.tenant]} tenant={data.tenant}>
 	<!--<slot /> -->
 	{#each data.config[status_message] as component}
 		{#if component.component === 'Text'}
 			<Text {...component} />
+		{/if}
+		{#if component.component === 'Image'}
+			<Image {...component} tenant={data.tenant}/>
 		{/if}
 		{#if component.component === 'Checkbox'}
 		<Checkbox {...component} />
@@ -45,3 +61,4 @@
 		{/if}
 	{/each}
 </svelte:component>
+</QueryClientProvider>
