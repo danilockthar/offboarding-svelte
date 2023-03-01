@@ -52,8 +52,8 @@ services:
         traefik.http.services.${ENVIRONMENT}_offboarding.loadbalancer.server.port: "3000"
 
         # MIDDLEWARES
-        traefik.http.middlewares.${ENVIRONMENT}-viumi.headers.customResponseHeaders.server: "x-tenant:${VIUMI_TENANT_NAME}"
-
+        traefik.http.middlewares.${ENVIRONMENT}-viumi.headers.customResponseHeaders.server: "X-Tenant:macro"
+        traefik.http.middlewares.${ENVIRONMENT}-viumi.headers.customResponseHeaders.X-Tenant: "macro"
         # VIUMI - MAIN
         traefik.http.routers.${ENVIRONMENT}-viumi-main.rule: "Host(`${VIUMI_DOMAIN}`) && Path(`/`)"
         traefik.http.routers.${ENVIRONMENT}-viumi-main.entrypoints: "web,websecure"
