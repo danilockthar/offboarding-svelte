@@ -26,7 +26,6 @@
 	/**@type {string | number}*/
 	let account_id;
 	store.subscribe(values => {
-		console.log(values)
 		  // @ts-ignore
 		token = values.token;
 		  // @ts-ignore

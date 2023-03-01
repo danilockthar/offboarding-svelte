@@ -19,7 +19,6 @@
     export let id;
 
     const handleChange = () => store.update(values => {
-        console.log(key, value)
         return {
             ...values,
             [key]:value,

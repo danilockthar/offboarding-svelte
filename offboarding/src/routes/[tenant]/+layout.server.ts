@@ -6,11 +6,11 @@ import { response_data } from '../../services/store';
 export async function load({ params, fetch, url }: any) {
 	const tenants = ['viumi'];
 	if (!tenants.includes(params.tenant)) {
-		throw error(404, 'Not found');
+		throw error(404, 'Not Found');
 	}
 	const pt_token = url.searchParams.get('token');
 	if (!pt_token) {
-		throw error(404, 'Not found');
+		throw error(403, 'Unauthorized');
 	}
 	const config = await fetch(`/api/get-config`, {
 		method: 'POST',
@@ -31,6 +31,13 @@ export async function load({ params, fetch, url }: any) {
 	}
 	try {
 		const response = await canUnsubscribe(account_data?.data?.id);
+		if (!response.ok) {
+			return {
+				tenant: params.tenant,
+				response: { status_code: 'ERROR' },
+				config: data
+			};
+		}
 		const result = await response.json();
 		return {
 			tenant: params.tenant,
@@ -40,7 +47,7 @@ export async function load({ params, fetch, url }: any) {
 			token: pt_token
 		};
 	} catch (error) {
-		const mockResponse = { message: 'error', status_code: 'PENDING_DEPOSIT' };
+		const mockResponse = { message: 'error', status_code: 'ERROR' };
 		return {
 			tenant: params.tenant,
 			response: mockResponse,
