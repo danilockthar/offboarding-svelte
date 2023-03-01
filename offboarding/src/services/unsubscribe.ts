@@ -2,6 +2,7 @@ export const unsubscribe = (token: string, account_id: string | number) => {
 	const myHeaders = new Headers();
 	myHeaders.append('X-Authentication-Token', token);
 	myHeaders.append('Content-Type', 'application/json');
+	myHeaders.append('X-Tenant', 'macro');
 
 	const raw = JSON.stringify({
 		merchant_id: account_id,
