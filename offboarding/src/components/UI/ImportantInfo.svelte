@@ -28,7 +28,7 @@
 
 <div {id} style="background-color:{bgColor}" class="grid p-4 grid-cols-[35px_1fr] h-fit">
 	<img src={`/${tenant}/assets/icon_alert.svg`} alt="Important information" />
-	<div class="grid gap-y-4">
+	<div>
 		{#if containsHTML(primaryText)}
 			{@html primaryText}
 		{:else}
