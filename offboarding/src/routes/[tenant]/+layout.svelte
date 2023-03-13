@@ -8,10 +8,9 @@
 	import Checkbox from '../../components/UI/Checkbox.svelte';
 	import { response_data, store } from '../../services/store';
 	import Modal from '../../components/UI/Modal.svelte';
-	import { QueryClientProvider, QueryClient } from '@tanstack/svelte-query'
-	import { browser } from '$app/environment'
+	import { QueryClientProvider, QueryClient } from '@tanstack/svelte-query';
+	import { browser } from '$app/environment';
 	import Image from '../../components/UI/Image.svelte';
-
 
 	/**@type {Record<string,any>}*/
 	const layouts = {
@@ -30,41 +29,40 @@
 		return {
 			...prev,
 			account_id: data.account,
-			token: data.token,
-		}
-	} )
+			token: data.token
+		};
+	});
 	export const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        enabled: browser,
-      },
-    },
-  })
-
+		defaultOptions: {
+			queries: {
+				enabled: browser
+			}
+		}
+	});
 </script>
 
 <QueryClientProvider client={queryClient}>
-<svelte:component this={layouts[data.tenant]} tenant={data.tenant}>
-	<!--<slot /> -->
-	{#each data.config[status_message] as component}
-		{#if component.component === 'Text'}
-			<Text {...component} />
-		{/if}
-		{#if component.component === 'Image'}
-			<Image {...component} tenant={data.tenant}/>
-		{/if}
-		{#if component.component === 'Checkbox'}
-		<Checkbox {...component} />
-		{/if}
-		{#if component.component === 'Modal'}
-		<Modal {...component} tenant={data.tenant}/>
-		{/if}
-		{#if component.component === 'ImportantInfo'}
-			<ImportantInfo {...component} tenant={data.tenant} />
-		{/if}
-		{#if component.component === 'CallToAction'}
-			<CallToAction {...component} tenant={data.tenant}/>
-		{/if}
-	{/each}
-</svelte:component>
+	<svelte:component this={layouts[data.tenant]} tenant={data.tenant}>
+		<!--<slot /> -->
+		{#each data.config[status_message] as component}
+			{#if component.component === 'Text'}
+				<Text {...component} />
+			{/if}
+			{#if component.component === 'Image'}
+				<Image {...component} tenant={data.tenant} />
+			{/if}
+			{#if component.component === 'Checkbox'}
+				<Checkbox {...component} />
+			{/if}
+			{#if component.component === 'Modal'}
+				<Modal {...component} tenant={data.tenant} />
+			{/if}
+			{#if component.component === 'ImportantInfo'}
+				<ImportantInfo {...component} tenant={data.tenant} />
+			{/if}
+			{#if component.component === 'CallToAction'}
+				<CallToAction {...component} tenant={data.tenant} />
+			{/if}
+		{/each}
+	</svelte:component>
 </QueryClientProvider>

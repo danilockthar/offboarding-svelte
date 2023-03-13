@@ -30,9 +30,7 @@ export async function load({ params, fetch, url }: any) {
 		throw error(404, 'Account Not Found');
 	}
 	try {
-		console.log(account_data?.data?.id);
 		const response = await canUnsubscribe(pt_token, account_data?.data?.id);
-		console.log(response);
 		if (!response.ok) {
 			return {
 				tenant: params.tenant,
@@ -41,7 +39,6 @@ export async function load({ params, fetch, url }: any) {
 			};
 		}
 		const result = await response.json();
-		console.log(result);
 		return {
 			tenant: params.tenant,
 			response: result,
