@@ -10,7 +10,7 @@ export async function load({ params, fetch, url }: any) {
 	}
 	const pt_token = url.searchParams.get('token');
 	if (!pt_token) {
-		throw error(403, 'Unauthorized');
+		throw error(403, 'You should provide a token');
 	}
 	const config = await fetch(`/api/get-config`, {
 		method: 'POST',
@@ -23,7 +23,7 @@ export async function load({ params, fetch, url }: any) {
 
 	const account = await getAccount(pt_token);
 	if (!account.ok) {
-		throw error(403, 'Unauthorized');
+		throw error(403, 'You Are Unauthorized!');
 	}
 	const account_data = await account.json();
 	if (!account_data.data?.id) {
