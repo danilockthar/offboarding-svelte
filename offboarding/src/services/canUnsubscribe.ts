@@ -17,7 +17,7 @@ export const canUnsubscribe = (token: string, account_id: number | string) => {
 	};
 
 	return fetch(
-		'https://api-macro.dev.geopagos.com/api/v1.0/CanUnsubscribe/',
+		'https://api-macro.test.geopagos.com/api/v1.0/CanUnsubscribe/',
 		requestOptions as RequestInit
 	);
 };
