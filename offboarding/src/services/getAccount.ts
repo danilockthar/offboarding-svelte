@@ -9,5 +9,5 @@ export const getAccount = (token: string) => {
 		headers: myHeaders,
 		redirect: 'follow'
 	};
-	return fetch('https://api-macro.dev.geopagos.com/api/account/', requestOptions as RequestInit);
+	return fetch('https://api-macro.test.geopagos.com/api/account/', requestOptions as RequestInit);
 };
