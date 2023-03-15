@@ -33,6 +33,7 @@ services:
       - VIUMI_DASHBOARD_DOMAIN=http://dashboard-macro.local.geopagos.com
       - VIUMI_BACKEND_DOMAIN=http://backend-macro.local.geopagos.com
       - VIUMI_API_DOMAIN=http://backend-macro.local.geopagos.com/api
+      - PASSPHRASE=somefrase
 
   traefik:
     image: 'traefik:v2.2.8'

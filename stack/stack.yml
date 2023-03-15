@@ -17,6 +17,7 @@ services:
       - VIUMI_API_DOMAIN=${VIUMI_API_DOMAIN}
       - VIUMI_DOMAIN
       - VIUMI_TENANT_NAME
+      - PASSPHRASE=${PASSPHRASE}
 
     deploy:
       mode: replicated

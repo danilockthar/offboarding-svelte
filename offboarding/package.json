@@ -54,6 +54,7 @@
 	"dependencies": {
 		"@tanstack/svelte-query": "^4.24.10",
 		"axios": "^1.2.4",
+		"dotenv": "^16.0.3",
 		"sswr": "^1.7.0"
 	}
 }
