@@ -3,12 +3,17 @@ import { canUnsubscribe } from '../../services/canUnsubscribe';
 import { getAccount } from '../../services/getAccount';
 import { response_data } from '../../services/store';
 import { secrets } from '$lib/server/secrets';
-import {env} from '$env/dynamic/private'
+import { env } from '$env/dynamic/public';
 
 export async function load({ params, fetch, url }: any) {
 	const tenants = ['viumi'];
+	const apiDomains: Record<string, any> = {
+		viumi: env.PUBLIC_VIUMI_BACKEND_DOMAIN
+	};
 
-	console.log(env.PASSPHRASE)
+	const api_domain = apiDomains[params.tenant];
+
+	console.log(api_domain);
 	if (!tenants.includes(params.tenant)) {
 		throw error(404, 'Not Found');
 	}
@@ -28,8 +33,8 @@ export async function load({ params, fetch, url }: any) {
 
 	const { data } = await config.json();
 
-	const account = await getAccount(pt_token);
-
+	const account = await getAccount(pt_token, api_domain);
+	console.log(account);
 	if (!account.ok) {
 		throw error(403, 'You Are Unauthorized!');
 	}
@@ -41,7 +46,7 @@ export async function load({ params, fetch, url }: any) {
 	}
 
 	try {
-		const response = await canUnsubscribe(pt_token, account_data?.data?.id);
+		const response = await canUnsubscribe(pt_token, account_data?.data?.id, api_domain);
 		if (!response.ok) {
 			return {
 				tenant: params.tenant,

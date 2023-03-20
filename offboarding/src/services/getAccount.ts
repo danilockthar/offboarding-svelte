@@ -1,4 +1,4 @@
-export const getAccount = (token: string) => {
+export const getAccount = (token: string, api_domain: string) => {
 	const myHeaders = new Headers();
 	myHeaders.append('X-Authentication-Token', token);
 	myHeaders.append('Content-Type', 'application/json');
@@ -9,5 +9,6 @@ export const getAccount = (token: string) => {
 		headers: myHeaders,
 		redirect: 'follow'
 	};
-	return fetch('https://api-macro.dev.geopagos.com/api/account/', requestOptions as RequestInit);
+	console.log(api_domain);
+	return fetch(api_domain + '/account/', requestOptions as RequestInit);
 };

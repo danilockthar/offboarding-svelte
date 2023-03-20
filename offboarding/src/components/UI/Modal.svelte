@@ -3,6 +3,7 @@
 	import { createMutation,useIsMutating } from '@tanstack/svelte-query'
 	import { response_data, store } from '../../services/store';
 	import { unsubscribe } from '../../services/unsubscribe';
+	import { env } from '$env/dynamic/public';
 
 	/**@type {string}*/
 	export let tenant;
@@ -14,6 +15,11 @@
 	export let modalBody;
 	/**@type {Array<Record<string, string>>}*/
 	export let footer;
+
+	/**@type {Record<string,any>}*/
+	const apiDomains = {
+	viumi: env.PUBLIC_VIUMI_BACKEND_DOMAIN
+};
 
 	let isLoading = false;
 	const dispatch = createEventDispatcher();
@@ -36,7 +42,7 @@
 		if(!token || !account_id) return false
 		isLoading = true
 		try {
-			const response = await unsubscribe(token, account_id);
+			const response = await unsubscribe(token, account_id, apiDomains[tenant]);
 			const data = await response.json();
 			response_data.set({message:data.message, status_code:'SUCCESS'})
 			isLoading = false
@@ -52,11 +58,6 @@
 		unsubscribe: unsubscribeFc
 	};
 </script>
-<!-- {$addMutation.status === 'loading'
-? 'Saving...'
-: $addMutation.status === 'error'
-? $addMutation.error.message
-: 'Saved!'} -->
 <div class="fixed w-screen h-screen bg-[#00000057] top-0 left-0 {isModalOpen ? 'block' : 'hidden'}">
 	<div
 		id="dialog-modal"

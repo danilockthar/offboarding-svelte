@@ -1,4 +1,6 @@
-export const canUnsubscribe = (token: string, account_id: number | string) => {
+import { env } from '$env/dynamic/private';
+
+export const canUnsubscribe = (token: string, account_id: number | string, api_domain: string) => {
 	const myHeaders = new Headers();
 	myHeaders.append('X-Authentication-Token', token);
 	myHeaders.append('X-Tenant', 'macro');
@@ -16,8 +18,5 @@ export const canUnsubscribe = (token: string, account_id: number | string) => {
 		redirect: 'follow'
 	};
 
-	return fetch(
-		'https://api-macro.dev.geopagos.com/api/v1.0/CanUnsubscribe/',
-		requestOptions as RequestInit
-	);
+	return fetch(`${api_domain}/v1.0/CanUnsubscribe/`, requestOptions as RequestInit);
 };

@@ -1,4 +1,4 @@
-export const unsubscribe = (token: string, account_id: string | number) => {
+export const unsubscribe = (token: string, account_id: string | number, api_domain: string) => {
 	const myHeaders = new Headers();
 	myHeaders.append('X-Authentication-Token', token);
 	myHeaders.append('Content-Type', 'application/json');
@@ -17,7 +17,7 @@ export const unsubscribe = (token: string, account_id: string | number) => {
 	};
 
 	return fetch(
-		'https://api-macro.dev.geopagos.com/api/v1.0/Unsubscribe/',
+		api_domain + '/v1.0/Unsubscribe/',
 		/**@ts-ignore */
 		requestOptions
 	);
