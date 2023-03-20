@@ -34,9 +34,8 @@ export async function load({ params, fetch, url }: any) {
 	const { data } = await config.json();
 
 	const account = await getAccount(pt_token, api_domain);
-	console.log(account);
 	if (!account.ok) {
-		throw error(403, 'You Are Unauthorized!');
+		throw error(403, `You Are Unauthorized!|| ${api_domain}`);
 	}
 
 	const account_data = await account.json();
