@@ -9,6 +9,5 @@ export const getAccount = (token: string, api_domain: string) => {
 		headers: myHeaders,
 		redirect: 'follow'
 	};
-	console.log(api_domain);
 	return fetch(api_domain + '/account/', requestOptions as RequestInit);
 };

@@ -13,7 +13,6 @@ export async function load({ params, fetch, url }: any) {
 
 	const api_domain = apiDomains[params.tenant];
 
-	console.log(api_domain);
 	if (!tenants.includes(params.tenant)) {
 		throw error(404, 'Not Found');
 	}
@@ -35,6 +34,11 @@ export async function load({ params, fetch, url }: any) {
 
 	const account = await getAccount(pt_token, api_domain);
 	if (!account.ok) {
+		return {
+			tenant: params.tenant,
+			response: { status_code: 'ERROR' },
+			config: data
+		};
 		throw error(403, `You Are Unauthorized!|| ${api_domain}`);
 	}
 
