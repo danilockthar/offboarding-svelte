@@ -30,10 +30,8 @@ services:
     environment:
       - DEBUG=true
       - TENANT_VIUMI_ENABLED=true
-      - VIUMI_DASHBOARD_DOMAIN=http://dashboard-macro.local.geopagos.com
-      - PUBLIC_VIUMI_BACKEND_DOMAIN=https://api-macro.dev.geopagos.com/api
-      - VIUMI_API_DOMAIN=http://backend-macro.local.geopagos.com/api
-      - PASSPHRASE=somefrase
+      - PUBLIC_VIUMI_DASHBOARD_URL=https://macro-dashboard.dev.geopagos.com/dashboard
+      - PUBLIC_VIUMI_BACKEND_DOMAIN=https://api-macro.test.geopagos.com/api
 
   traefik:
     image: 'traefik:v2.2.8'

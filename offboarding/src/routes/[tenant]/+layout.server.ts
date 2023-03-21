@@ -1,17 +1,12 @@
 import { error } from '@sveltejs/kit';
 import { canUnsubscribe } from '../../services/canUnsubscribe';
 import { getAccount } from '../../services/getAccount';
-import { response_data } from '../../services/store';
-import { secrets } from '$lib/server/secrets';
-import { env } from '$env/dynamic/public';
+import { mappedEnv } from '$lib/mappedEnv';
 
 export async function load({ params, fetch, url }: any) {
 	const tenants = ['viumi'];
-	const apiDomains: Record<string, any> = {
-		viumi: env.PUBLIC_VIUMI_BACKEND_DOMAIN
-	};
 
-	const api_domain = apiDomains[params.tenant];
+	const api_domain = mappedEnv(params.tenant, 'BACKEND_DOMAIN');
 
 	if (!tenants.includes(params.tenant)) {
 		throw error(404, 'Not Found');
@@ -22,6 +17,7 @@ export async function load({ params, fetch, url }: any) {
 		throw error(403, 'You should provide a token');
 	}
 
+	/**Returns the partner pages and their components */
 	const config = await fetch(`/api/get-config`, {
 		method: 'POST',
 		body: JSON.stringify({ tenant: params.tenant }),
@@ -32,6 +28,7 @@ export async function load({ params, fetch, url }: any) {
 
 	const { data } = await config.json();
 
+	/** Returns the account_id or merchant_id we use later  */
 	const account = await getAccount(pt_token, api_domain);
 	if (!account.ok) {
 		return {
@@ -45,6 +42,7 @@ export async function load({ params, fetch, url }: any) {
 	const account_data = await account.json();
 
 	if (!account_data.data?.id) {
+		/**if account id doesnt exist it will fails */
 		throw error(404, 'Account Not Found');
 	}
 
