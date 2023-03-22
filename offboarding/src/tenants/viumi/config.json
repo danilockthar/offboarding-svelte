@@ -232,7 +232,7 @@
 		{
 			"component": "ImportantInfo",
 			"id": "important-info-component",
-			"primaryText": "<p>En este momento no podemos enviar tu solicitud. Intentalo más tarde o comunicate con nosotros al <a href='tel:0810-345-4222' style='color:#4527A0;font-weight:600;'>0810-345-4222</a>.</p>"
+			"primaryText": "<p>{{message}}</p>"
 		},
 		{
 			"component": "Text",

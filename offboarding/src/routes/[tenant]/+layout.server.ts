@@ -33,7 +33,7 @@ export async function load({ params, fetch, url }: any) {
 	if (!account.ok) {
 		return {
 			tenant: params.tenant,
-			response: { status_code: 'ERROR' },
+			response: { status_code: 400 },
 			config: data
 		};
 		throw error(403, `You Are Unauthorized!|| ${api_domain}`);
@@ -51,7 +51,7 @@ export async function load({ params, fetch, url }: any) {
 		if (!response.ok) {
 			return {
 				tenant: params.tenant,
-				response: { status_code: 'ERROR' },
+				response: { status_code: 400 },
 				config: data
 			};
 		}
@@ -64,7 +64,7 @@ export async function load({ params, fetch, url }: any) {
 			token: pt_token
 		};
 	} catch (error) {
-		const mockResponse = { message: 'error', status_code: 'ERROR' };
+		const mockResponse = { message: 'error', status_code: 400 };
 		return {
 			tenant: params.tenant,
 			response: mockResponse,
