@@ -101,7 +101,7 @@
 			"action": "goback"
 		}
 	],
-	"DEPOSIT_PENDING": [
+	"PENDING_DEPOSIT": [
 		{
 			"component": "CallToAction",
 			"id": "back-icon-viumi",
