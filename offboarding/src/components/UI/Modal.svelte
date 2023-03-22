@@ -4,6 +4,7 @@
 	import { response_data, store } from '../../services/store';
 	import { unsubscribe } from '../../services/unsubscribe';
 	import { env } from '$env/dynamic/public';
+	import { mappedEnv } from '$lib/mappedEnv';
 
 	/**@type {string}*/
 	export let tenant;
@@ -16,10 +17,8 @@
 	/**@type {Array<Record<string, string>>}*/
 	export let footer;
 
-	/**@type {Record<string,any>}*/
-	const apiDomains = {
-	viumi: env.PUBLIC_VIUMI_BACKEND_DOMAIN
-};
+	const api_domain = mappedEnv(tenant, 'BACKEND_DOMAIN');
+	const xtenant = mappedEnv(tenant, 'X_TENANT');
 
 	let isLoading = false;
 	const dispatch = createEventDispatcher();
@@ -42,7 +41,7 @@
 		if(!token || !account_id) return false
 		isLoading = true
 		try {
-			const response = await unsubscribe(token, account_id, apiDomains[tenant]);
+			const response = await unsubscribe(token, account_id, api_domain, xtenant);
 			const data = await response.json();
 			response_data.set({message:data.message, status_code:'SUCCESS'})
 			isLoading = false

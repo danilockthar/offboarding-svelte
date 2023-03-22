@@ -7,6 +7,7 @@ export async function load({ params, fetch, url }: any) {
 	const tenants = ['viumi'];
 
 	const api_domain = mappedEnv(params.tenant, 'BACKEND_DOMAIN');
+	const xtenant = mappedEnv(params.tenant, 'X_TENANT');
 
 	if (!tenants.includes(params.tenant)) {
 		throw error(404, 'Not Found');
@@ -29,7 +30,7 @@ export async function load({ params, fetch, url }: any) {
 	const { data } = await config.json();
 
 	/** Returns the account_id or merchant_id we use later  */
-	const account = await getAccount(pt_token, api_domain);
+	const account = await getAccount(pt_token, api_domain, xtenant);
 	if (!account.ok) {
 		return {
 			tenant: params.tenant,
@@ -47,7 +48,8 @@ export async function load({ params, fetch, url }: any) {
 	}
 
 	try {
-		const response = await canUnsubscribe(pt_token, account_data?.data?.id, api_domain);
+		const response = await canUnsubscribe(pt_token, account_data?.data?.id, api_domain, xtenant);
+
 		if (!response.ok) {
 			return {
 				tenant: params.tenant,

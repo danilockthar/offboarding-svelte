@@ -1,11 +1,17 @@
 import { env } from '$env/dynamic/private';
+import util from 'util';
 
-export const canUnsubscribe = (token: string, account_id: number | string, api_domain: string) => {
-	const myHeaders = new Headers();
-	myHeaders.append('X-Authentication-Token', token);
-	myHeaders.append('X-Tenant', 'macro');
-	myHeaders.append('Content-Type', 'application/json');
-
+export const canUnsubscribe = async (
+	token: string,
+	account_id: number | string,
+	api_domain: string,
+	xtenant: string
+) => {
+	const headers = new Headers({
+		'X-Authentication-Token': token.trim(),
+		'X-Tenant': xtenant,
+		'Content-Type': 'application/json'
+	});
 	const raw = JSON.stringify({
 		merchant_id: account_id
 	});
@@ -13,10 +19,11 @@ export const canUnsubscribe = (token: string, account_id: number | string, api_d
 	/**@type {Record<string, any>} */
 	const requestOptions = {
 		method: 'POST',
-		headers: myHeaders,
-		body: raw,
-		redirect: 'follow'
+		headers,
+		body: raw
 	};
 
-	return fetch(`${api_domain}/v1.0/CanUnsubscribe/`, requestOptions as RequestInit);
+	const request = await fetch(`${api_domain}/v1.0/CanUnsubscribe/`, requestOptions as RequestInit);
+	/* console.log(util.inspect(request, { showHidden: false, depth: null, colors: true })); */
+	return request;
 };

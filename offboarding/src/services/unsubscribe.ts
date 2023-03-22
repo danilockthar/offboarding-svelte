@@ -1,9 +1,14 @@
-export const unsubscribe = (token: string, account_id: string | number, api_domain: string) => {
-	const myHeaders = new Headers();
-	myHeaders.append('X-Authentication-Token', token);
-	myHeaders.append('Content-Type', 'application/json');
-	myHeaders.append('X-Tenant', 'macro');
-
+export const unsubscribe = (
+	token: string,
+	account_id: string | number,
+	api_domain: string,
+	xtenant: string
+) => {
+	const headers = new Headers({
+		'Content-Type': 'application/json',
+		'X-Authentication-Token': token.trim(),
+		'X-Tenant': xtenant
+	});
 	const raw = JSON.stringify({
 		merchant_id: account_id,
 		products: ['account']
@@ -11,7 +16,7 @@ export const unsubscribe = (token: string, account_id: string | number, api_doma
 
 	const requestOptions = {
 		method: 'POST',
-		headers: myHeaders,
+		headers,
 		body: raw,
 		redirect: 'follow'
 	};
