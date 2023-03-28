@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	body {
+		font-family: Roboto;
+	}
+	h1 {
+		@apply text-3xl;
+	}
+	h2 {
+		@apply text-2xl;
+	}
+	h3 {
+		@apply text-xl;
+	}
+	ul {
+		padding: 0.5rem;
+	}
+	ul,
+	ol {
+		list-style: revert;
+		list-style-position: inside;
+	}
+	button {
+		transition: 0.3s !important;
+	}
+	.disabled-btn {
+		background-color: #a8a8a8 !important;
+	}
+	.loadersvg {
+		width: 15px;
+		align-self: center;
+	}
+	/* ... */
+}
+
+@layer components {
+	#title-viumi {
+		@apply text-left lg:text-center text-[#2B2B2B] font-[500];
+	}
+	#important-info-component {
+		display: grid;
+		@apply bg-[#f6f4fa];
+	}
+	#modal-title {
+		@apply text-[#4527A0] font-bold justify-self-start;
+	}
+	#dialog-modal {
+		@apply rounded-md;
+	}
+	#diagol-modal-footer {
+		@apply flex justify-center flex-col lg:flex-row gap-y-4 lg:gap-y-0 gap-x-4;
+		@apply lg:justify-end pt-4 pb-0 pl-0 pr-0 lg:pr-4 border-t border-[#0000000d];
+	}
+	#close-modal-btn {
+		@apply text-[#4527A0] font-bold;
+	}
+	#back-button-viumi {
+		@apply lg:text-center text-[#4527A0] font-bold mt-6 w-fit justify-self-center;
+	}
+	#back-button-success {
+		@apply lg:text-center text-[#4527A0] font-bold mt-6 w-fit justify-self-center lg:hidden;
+	}
+	#back-icon-viumi {
+		@apply hidden justify-self-start lg:block;
+	}
+	#close-modal-btn-2 {
+		@apply text-[red];
+		text-decoration: dashed;
+	}
+	#stay-in {
+		@apply text-white font-bold bg-[#4527A0] p-2 lg:py-2 lg:px-6 rounded-[20px];
+		display: flex;
+		justify-content: center;
+		gap: 0.5rem;
+	}
+	#agree-checkbox {
+		@apply w-fit grid grid-cols-[min-content_1fr] gap-x-2 mt-2;
+	}
+	#agree-checkbox-input {
+		@apply w-4 rounded;
+	}
+	#agree-checkbox-input:checked {
+		@apply accent-[#4527a0];
+	}
+	#delete-account-with-modal-modal-title {
+		@apply text-white font-bold bg-[#4527A0] p-2 lg:py-2 lg:px-6 rounded-[20px] lg:w-80 lg:justify-self-center;
+	}
+	#stay-in-viumi {
+		@apply lg:text-center text-[#4527A0] font-bold w-fit justify-self-center;
+	}
+	#success_image {
+		justify-self: center;
+		margin-bottom: 15px;
+	}
+}
