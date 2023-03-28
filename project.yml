@@ -1,0 +1,3 @@
+name: 'offboarding'
+version: '1.0.00'
+slack_channel: '#soporte-registro'

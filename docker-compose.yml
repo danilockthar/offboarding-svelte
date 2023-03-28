@@ -1,0 +1,64 @@
+version: '3.7'
+services:
+  offboarding:
+    build: ./offboarding
+    depends_on:
+      - traefik
+    ports:
+      - '3000:3000'
+    labels:
+      traefik.enable:
+        'true'
+        #Traefik 2.x
+      traefik.docker.lbswarm: 'true'
+      traefik.http.services.dev_offboarding.loadbalancer.server.port: '3000'
+
+      # MIDDLEWARES
+      traefik.http.middlewares.dev-viumi.headers.customResponseHeaders.server: 'x-tenant:viumi'
+
+      # VIUMI - MAIN
+      traefik.http.routers.dev-viumi-main.rule: 'Host(`offboarding-viumi.local.geopagos.com`) && Path(`/`)'
+      traefik.http.routers.dev-viumi-main.entrypoints: 'web,websecure'
+      traefik.http.routers.dev-viumi-main.priority: '601'
+      traefik.http.routers.dev-viumi-main.middlewares: 'dev-viumi@docker,dev-viumi-main@docker'
+      traefik.http.middlewares.dev-viumi-main.replacepath.path: '/viumi'
+
+      # VIUMI - COMMON
+      traefik.http.routers.dev_firstadata-common.rule: 'Host(`offboarding-viumi.local.geopagos.com`) && PathPrefix(`/assets`,`/_app`,`/viumi`,`/api`)'
+      traefik.http.routers.dev_firstadata-common.middlewares: 'dev-viumi@docker'
+
+    environment:
+      - DEBUG=true
+      - TENANT_VIUMI_ENABLED=true
+      - PUBLIC_VIUMI_DASHBOARD_URL=https://macro-dashboard.dev.geopagos.com/dashboard
+      - PUBLIC_VIUMI_BACKEND_DOMAIN=https://api-macro.test.geopagos.com/api
+      - PUBLIC_VIUMI_X_TENANT=macro
+
+  traefik:
+    image: 'traefik:v2.2.8'
+    command:
+      - '--log.level=DEBUG'
+      - '--api.insecure=true'
+      - '--providers.docker.exposedbydefault=false'
+      - '--providers.docker=true'
+      - '--entrypoints.web.address=:80'
+      - '--entryPoints.websecure.address=:443'
+      - '--ping=true'
+      - '--entryPoints.websecure.forwardedHeaders.insecure'
+      - '--entryPoints.websecure.proxyProtocol.insecure'
+      - '--accesslog.fields.headers.defaultmode=keep'
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+      - target: 443
+        published: 443
+        protocol: tcp
+        mode: host
+      - target: 8080
+        published: 8080
+        protocol: tcp
+        mode: host
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
