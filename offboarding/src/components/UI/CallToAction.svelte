@@ -1,6 +1,9 @@
 <script>
-	import { store } from "../../services/store";
+	import { isWebview } from "../../lib/isWebview";
+import { store } from "../../services/store";
 	import Modal from "./Modal.svelte";
+	import {page} from '$app/stores';
+	import { mappedEnv } from "../../lib/mappedEnv";
 
 	/**@type {string}*/
 	export let tenant;
@@ -19,12 +22,14 @@
 
 	export let isModalOpen = false;
 
+	const dashboardUrl = mappedEnv(tenant, 'DASHBOARD_URL')
+
 	/**
 	 * @type {any}
 	 */
 	 export let isDisabled = false;
 	if(depends_on){
-		store.subscribe((value => {
+		store.subscribe(((/** @type {{ [x: string]: any; }} */ value) => {
 			// @ts-ignore
 			isDisabled = !value[depends_on] 
 		}))
@@ -39,14 +44,22 @@
 {#if modal}
 	<Modal on:close={() => (isModalOpen = false)} {...modal} {isModalOpen} {tenant} />
 	<button id={`${id}-modal-title`} disabled={isDisabled} class={isDisabled === true?  'disabled-btn': null} on:click={() => (isModalOpen = true)}> {value} </button>
-{:else}
-<button {id} on:click={actions[action]}>
+{:else if action === 'goback'}
+<a {id} href={$page.data.isWebView ? 'https://exitwebview.com' :dashboardUrl }>
 	{#if icon}
 		<img src={`/assets/${icon}.svg`} alt="call to action icon" />
 	{:else}
 		{value}
 	{/if}
-</button>
+</a>
+{:else}
+<a {id} href={action}>
+	{#if icon}
+		<img src={`/assets/${icon}.svg`} alt="call to action icon" />
+	{:else}
+		{value}
+	{/if}
+</a>
 {/if}
 
 

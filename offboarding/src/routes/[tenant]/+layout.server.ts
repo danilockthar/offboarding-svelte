@@ -2,12 +2,16 @@ import { error } from '@sveltejs/kit';
 import { canUnsubscribe } from '../../services/canUnsubscribe';
 import { getAccount } from '../../services/getAccount';
 import { mappedEnv } from '$lib/mappedEnv';
+import { isWebview } from '../../lib/isWebview';
 
-export async function load({ params, fetch, url }: any) {
+export async function load({ params, fetch, url, request}: any) {
 	const tenants = ['viumi'];
+
 
 	const api_domain = mappedEnv(params.tenant, 'BACKEND_DOMAIN');
 	const xtenant = mappedEnv(params.tenant, 'X_TENANT');
+
+	const isWebView = isWebview(request.headers.get('user-agent'))
 
 	if (!tenants.includes(params.tenant)) {
 		throw error(404, 'Not Found');
@@ -35,7 +39,8 @@ export async function load({ params, fetch, url }: any) {
 		return {
 			tenant: params.tenant,
 			response: { status_code: 400 },
-			config: data
+			config: data,
+			isWebView
 		};
 		throw error(403, `You Are Unauthorized!|| ${api_domain}`);
 	}
@@ -54,7 +59,8 @@ export async function load({ params, fetch, url }: any) {
 			return {
 				tenant: params.tenant,
 				response: { status_code: 400 },
-				config: data
+				config: data,
+				isWebView
 			};
 		}
 		const result = await response.json();
@@ -63,7 +69,8 @@ export async function load({ params, fetch, url }: any) {
 			response: result,
 			config: data,
 			account: account_data.data.id,
-			token: pt_token
+			token: pt_token,
+			isWebView
 		};
 	} catch (error) {
 		const mockResponse = { message: 'error', status_code: 400 };
@@ -72,7 +79,8 @@ export async function load({ params, fetch, url }: any) {
 			response: mockResponse,
 			config: data,
 			account: account_data.data.id,
-			token: pt_token
+			token: pt_token,
+			isWebView
 		};
 	}
 }
