@@ -1,9 +1,9 @@
 <script>
-	import { isWebview } from "../../lib/isWebview";
-import { store } from "../../services/store";
-	import Modal from "./Modal.svelte";
-	import {page} from '$app/stores';
-	import { mappedEnv } from "../../lib/mappedEnv";
+	import { store } from '../../services/store';
+	import Modal from './Modal.svelte';
+	import { page } from '$app/stores';
+	import { mappedEnv } from '../../lib/mappedEnv';
+	import { isWebview } from '$lib/isWebview';
 
 	/**@type {string}*/
 	export let tenant;
@@ -22,44 +22,46 @@ import { store } from "../../services/store";
 
 	export let isModalOpen = false;
 
-	const dashboardUrl = mappedEnv(tenant, 'DASHBOARD_URL')
+	const dashboardUrl = mappedEnv(tenant, 'DASHBOARD_URL');
 
 	/**
 	 * @type {any}
 	 */
-	 export let isDisabled = false;
-	if(depends_on){
-		store.subscribe(((/** @type {{ [x: string]: any; }} */ value) => {
+	export let isDisabled = false;
+	if (depends_on) {
+		store.subscribe((/** @type {{ [x: string]: any; }} */ value) => {
 			// @ts-ignore
-			isDisabled = !value[depends_on] 
-		}))
+			isDisabled = !value[depends_on];
+		});
 	}
-
-	const goback = () => false;
-	/**@type {Record<string, () => void>}*/
-	const actions = {
-		goback
-	};
 </script>
+
 {#if modal}
 	<Modal on:close={() => (isModalOpen = false)} {...modal} {isModalOpen} {tenant} />
-	<button id={`${id}-modal-title`} disabled={isDisabled} class={isDisabled === true?  'disabled-btn': null} on:click={() => (isModalOpen = true)}> {value} </button>
+	<button
+		id={`${id}-modal-title`}
+		disabled={isDisabled}
+		class={isDisabled === true ? 'disabled-btn' : null}
+		on:click={() => (isModalOpen = true)}
+	>
+		{value}
+	</button>
 {:else if action === 'goback'}
-<a {id} href={$page.data.isWebView ? 'https://exitwebview.com' :dashboardUrl }>
-	{#if icon}
-		<img src={`/assets/${icon}.svg`} alt="call to action icon" />
-	{:else}
-		{value}
+	{#if !$page.data.isWebView}
+		<a {id} href={dashboardUrl}>
+			{#if icon}
+				<img src={`/assets/${icon}.svg`} alt="call to action icon" />
+			{:else}
+				{value}
+			{/if}
+		</a>
 	{/if}
-</a>
 {:else}
-<a {id} href={action}>
-	{#if icon}
-		<img src={`/assets/${icon}.svg`} alt="call to action icon" />
-	{:else}
-		{value}
-	{/if}
-</a>
+	<a {id} href={action}>
+		{#if icon}
+			<img src={`/assets/${icon}.svg`} alt="call to action icon" />
+		{:else}
+			{value}
+		{/if}
+	</a>
 {/if}
-
-

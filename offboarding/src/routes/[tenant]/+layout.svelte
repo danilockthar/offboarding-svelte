@@ -16,9 +16,12 @@
 		openpay: LayoutOpenpay,
 		notFound: NotFound
 	};
+	
 	/**@type {any}*/
 	export let data;
+
 	response_data.set(data.response);
+	
 	/**@type {string}*/
 	let status_message;
 	// @ts-ignore
