@@ -9,6 +9,7 @@
 	import { response_data, store } from '../../services/store';
 	import Modal from '../../components/UI/Modal.svelte';
 	import Image from '../../components/UI/Image.svelte';
+	import { onMount } from 'svelte';
 
 	/**@type {Record<string,any>}*/
 	const layouts = {
@@ -27,6 +28,7 @@
 	response_data.subscribe((value) => {
 		// @ts-ignore
 		status_message = value.status_code
+		
 		// @ts-ignore
 		if(value.status_code === 'SUCCESS' && typeof window !== undefined){
 			window.parent.postMessage({ 
@@ -41,7 +43,14 @@
 			token: data.token
 		};
 	});
-	
+	onMount( () => {
+		// @ts-ignore
+		if(status_message === 'SUCCESS' && typeof window !== undefined){
+			window.parent.postMessage({ 
+			event: 'offboardingLastScreenReached'
+			}, '*');
+		}
+	});
 
 </script>
 
