@@ -24,8 +24,16 @@
 	
 	/**@type {string}*/
 	let status_message;
-	// @ts-ignore
-	response_data.subscribe((value) => (status_message = value.status_code));
+	response_data.subscribe((value) => {
+		// @ts-ignore
+		status_message = value.status_code
+		// @ts-ignore
+		if(value.status_code === 'SUCCESS' && typeof window !== undefined){
+			window.parent.postMessage({ 
+			event: 'offboardingLastScreenReached'
+			}, '*');
+		}
+	});
 	store.update((/** @type {any} */ prev) => {
 		return {
 			...prev,
@@ -33,6 +41,8 @@
 			token: data.token
 		};
 	});
+	
+
 </script>
 
 <svelte:component this={layouts[data.tenant]} tenant={data.tenant}>
