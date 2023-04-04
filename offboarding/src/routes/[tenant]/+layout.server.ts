@@ -4,14 +4,13 @@ import { getAccount } from '../../services/getAccount';
 import { mappedEnv } from '$lib/mappedEnv';
 import { isWebview } from '../../lib/isWebview';
 
-export async function load({ params, fetch, url, request}: any) {
+export async function load({ params, fetch, url, request }: any) {
 	const tenants = ['viumi'];
-
 
 	const api_domain = mappedEnv(params.tenant, 'BACKEND_DOMAIN');
 	const xtenant = mappedEnv(params.tenant, 'X_TENANT');
 
-	const isWebView = isWebview(request.headers.get('user-agent'))
+	const isWebView = isWebview(request.headers.get('user-agent'));
 
 	if (!tenants.includes(params.tenant)) {
 		throw error(404, 'Not Found');
